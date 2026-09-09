@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Execution Report - {{ report.title or "UI Test Run" }}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 24px; background: #f5f6f8; color: #1a1a1a; }
+  .card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  h1 { margin-top: 0; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; color: #fff; }
+  .badge-passed { background: #22a559; }
+  .badge-failed { background: #d64545; }
+  .chart-wrap { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .chart-wrap canvas { max-width: 320px; max-height: 320px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .stat { background: #f0f2f5; border-radius: 6px; padding: 12px 18px; min-width: 100px; text-align: center; }
+  .stat .value { font-size: 24px; font-weight: bold; display: block; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #f0f2f5; }
+  tr.status-failed { background: #fdecec; }
+  tr.status-skipped { background: #f5f5f0; }
+  .screenshot { max-width: 260px; border: 1px solid #ddd; border-radius: 4px; margin-top: 6px; display: block; }
+  .ai-summary { background: #fff7e6; border-left: 4px solid #f5a623; padding: 16px; border-radius: 4px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Execution Report: {{ report.title or "UI Test Run" }}</h1>
+    <p><strong>Final URL:</strong> {{ report.final_url }}</p>
+    <p><strong>Overall status:</strong>
+      {% if report.passed %}
+        <span class="badge badge-passed">PASSED</span>
+      {% else %}
+        <span class="badge badge-failed">FAILED</span>
+      {% endif %}
+    </p>
+    <p><strong>Generated at:</strong> {{ generated_at }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Step Results</h2>
+    <div class="chart-wrap">
+      <canvas id="stepChart"></canvas>
+      <div class="stats">
+        <div class="stat"><span class="value">{{ report.summary.planned }}</span>Planned</div>
+        <div class="stat"><span class="value">{{ report.summary.executed }}</span>Executed</div>
+        <div class="stat"><span class="value">{{ report.summary.passed }}</span>Passed</div>
+        <div class="stat"><span class="value">{{ report.summary.failed }}</span>Failed</div>
+        <div class="stat"><span class="value">{{ report.summary.skipped }}</span>Skipped</div>
+      </div>
+    </div>
+  </div>
+
+  {% if ai_summary %}
+  <div class="card">
+    <h2>AI Overall Recommendation</h2>
+    <div class="ai-summary">{{ ai_summary }}</div>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <h2>All Steps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Step</th>
+          <th>Status</th>
+          <th>Duration (ms)</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for step in report.steps %}
+        <tr class="status-{{ step.status }}">
+          <td>{{ step.stage if step.stage is not none else "-" }}</td>
+          <td>{{ step.raw_step }}</td>
+          <td>{{ step.status }}</td>
+          <td>{{ step.duration_ms if step.duration_ms is not none else "N/A" }}</td>
+          <td>
+            {% if step.status == "failed" %}
+              {{ step.error }}
+              {% if step.screenshot %}
+                <img class="screenshot" src="{{ step.screenshot }}" alt="Screenshot for stage {{ step.stage }}">
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('stepChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Passed', 'Failed', 'Skipped'],
+        datasets: [{
+          data: [{{ report.summary.passed }}, {{ report.summary.failed }}, {{ report.summary.skipped }}],
+          backgroundColor: ['#22a559', '#d64545', '#9aa0a6'],
+        }]
+      },
+      options: {
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  </script>
+</body>
+</html>

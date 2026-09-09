@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Execution Report - My Bargains | Gajab</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 24px; background: #f5f6f8; color: #1a1a1a; }
+  .card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  h1 { margin-top: 0; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; color: #fff; }
+  .badge-passed { background: #22a559; }
+  .badge-failed { background: #d64545; }
+  .chart-wrap { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .chart-wrap canvas { max-width: 320px; max-height: 320px; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .stat { background: #f0f2f5; border-radius: 6px; padding: 12px 18px; min-width: 100px; text-align: center; }
+  .stat .value { font-size: 24px; font-weight: bold; display: block; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #f0f2f5; }
+  tr.status-failed { background: #fdecec; }
+  tr.status-skipped { background: #f5f5f0; }
+  .screenshot { max-width: 260px; border: 1px solid #ddd; border-radius: 4px; margin-top: 6px; display: block; }
+  .ai-summary { background: #fff7e6; border-left: 4px solid #f5a623; padding: 16px; border-radius: 4px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Execution Report: My Bargains | Gajab</h1>
+    <p><strong>Final URL:</strong> https://stg.gajab.com/my-bargains</p>
+    <p><strong>Overall status:</strong>
+      
+        <span class="badge badge-failed">FAILED</span>
+      
+    </p>
+    <p><strong>Generated at:</strong> 2026-09-10T01:28:49</p>
+  </div>
+
+  <div class="card">
+    <h2>Step Results</h2>
+    <div class="chart-wrap">
+      <canvas id="stepChart"></canvas>
+      <div class="stats">
+        <div class="stat"><span class="value">48</span>Planned</div>
+        <div class="stat"><span class="value">41</span>Executed</div>
+        <div class="stat"><span class="value">28</span>Passed</div>
+        <div class="stat"><span class="value">12</span>Failed</div>
+        <div class="stat"><span class="value">1</span>Skipped</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="card">
+    <h2>AI Overall Recommendation</h2>
+    <div class="ai-summary">
+
+This run produced 12 failures out of what appears to be a ~50-step suite on the My Bargains page, and while the raw count looks alarming, the failures cluster into two distinct root causes that change the severity picture. First, and most critically, the entire checkout-to-payment flow (stages 40–45) is blocked by a persistent `search-request-modal-alignment` overlay that intercepts pointer events, and the price-range filter (stage 26) is similarly blocked by a `header-backdrop` span with `z-[998]`; these are real, user-facing interaction bugs that would prevent a customer from completing a purchase, making the payment funnel the highest-priority blocker. Second, and unfortunately muddying the signal, several locators in the test script are clearly matching the wrong elements (e.g., `a[id*=&#39;buy&#39;]` resolving to a footer &#34;Terms &amp; Conditions&#34; link, `button[class*=&#39;a&#39;]` hitting a location menu button, `button[class*=&#39;15&#39;]` hitting a mobile Filter toggle), which means stages 27 and 41–43, 45, 46, and 48 are largely cascading or script-quality failures rather than confirmed app defects. Given that the core &#34;add-to-cart → pay online → confirm order&#34; path cannot be exercised cleanly and two overlay-interception bugs are suspected on the production UI, my recommendation is **NO-GO** for this build: engineering should first investigate and fix the `header-backdrop` and `search-request-modal` z-index/dismissal issues (P0), and QA should rework the brittle partial-match locators to stable data-testid selectors so the next run gives a trustworthy signal on whether the checkout flow actually functions end-to-end.</div>
+  </div>
+  
+
+  <div class="card">
+    <h2>All Steps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Step</th>
+          <th>Status</th>
+          <th>Duration (ms)</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr class="status-passed">
+          <td>-</td>
+          <td>goto</td>
+          <td>passed</td>
+          <td>N/A</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>1</td>
+          <td>Launch browser</td>
+          <td>passed</td>
+          <td>7659.8</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>2</td>
+          <td>Navigate to url &#39;https://stg.gajab.com/&#39;</td>
+          <td>passed</td>
+          <td>7506.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>3</td>
+          <td>Verify that home page is visible</td>
+          <td>passed</td>
+          <td>3495.0</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>4</td>
+          <td>Click on &#39;Log in&#39; or &#39;Sign up&#39; button</td>
+          <td>passed</td>
+          <td>5896.0</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>5</td>
+          <td>Verify url contains &#39;signin&#39; after page loads</td>
+          <td>passed</td>
+          <td>3759.8</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>6</td>
+          <td>Wait for the page to load completely and ensure all elements are visible</td>
+          <td>passed</td>
+          <td>3759.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>7</td>
+          <td>Enter random 10 digit mobile number in mobile field</td>
+          <td>passed</td>
+          <td>2569.6</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>8</td>
+          <td>Click on the check box for terms and conditions</td>
+          <td>passed</td>
+          <td>2563.0</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>9</td>
+          <td>Click &#39;Request OTP&#39; button</td>
+          <td>passed</td>
+          <td>4353.1</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>10</td>
+          <td>Enter OTP &#39;123456&#39; in OTP field</td>
+          <td>passed</td>
+          <td>2757.3</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>11</td>
+          <td>Wait for account creation form page to appear</td>
+          <td>passed</td>
+          <td>3754.1</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>12</td>
+          <td>Enter name &#39;Test User&#39; in name field</td>
+          <td>passed</td>
+          <td>2538.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>13</td>
+          <td>Click on &#39;Male&#39; button for gender selection</td>
+          <td>passed</td>
+          <td>5875.5</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>14</td>
+          <td>Click on &#39;Submit&#39; or &#39;Next&#39; button to create account</td>
+          <td>passed</td>
+          <td>4379.4</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>15</td>
+          <td>Click on location dropdown or location search field</td>
+          <td>passed</td>
+          <td>5738.5</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>16</td>
+          <td>Wait for location search field to become active</td>
+          <td>passed</td>
+          <td>3764.1</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>17</td>
+          <td>Enter pin code &#39;560001&#39; in location search field</td>
+          <td>passed</td>
+          <td>2582.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>18</td>
+          <td>Verify location results are displayed</td>
+          <td>failed</td>
+          <td>22348.0</td>
+          <td>
+            
+              Assertion text &#39;Verify location results are displayed&#39; not found or not visible
+              
+                <img class="screenshot" src="step_screenshots/18_assert_visible_verify_location_results_are_displayed_failed.png" alt="Screenshot for stage 18">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-skipped">
+          <td>19</td>
+          <td>Select the location from search results or dropdown</td>
+          <td>skipped</td>
+          <td>2078.3</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>20</td>
+          <td>Verify that Gajab Deal of the Day section is visible</td>
+          <td>failed</td>
+          <td>22360.4</td>
+          <td>
+            
+              Assertion text &#39;gajab deal of the day section is visible&#39; not found or not visible
+              
+                <img class="screenshot" src="step_screenshots/20_assert_visible_gajab_deal_of_the_day_section_is_visible_failed.png" alt="Screenshot for stage 20">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>21</td>
+          <td>Click share or email button for Deal of the Day product</td>
+          <td>passed</td>
+          <td>4422.9</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>22</td>
+          <td>Navigate to Trending Products section</td>
+          <td>passed</td>
+          <td>4645.1</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>23</td>
+          <td>Click on View All link in Just Bargained Product section</td>
+          <td>passed</td>
+          <td>4410.8</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>24</td>
+          <td>Click on Toys and Games category tab</td>
+          <td>passed</td>
+          <td>4431.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>25</td>
+          <td>Click on SERA&#39;S BASKET brand from the left filter</td>
+          <td>passed</td>
+          <td>4404.9</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>26</td>
+          <td>Click on price range filter and set from 427 to 727</td>
+          <td>failed</td>
+          <td>32366.6</td>
+          <td>
+            
+              Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&#34;button[id*=&#39;price&#39;]&#34;).first
+    - locator resolved to &lt;button id=&#34;price-filter-website-accordion-toggle-btn&#34; class=&#34;px-[16px] w-full hover:bg-[#FB7E01]/20  transition-colors cursor-pointer   &#34;&gt;…&lt;/button&gt;
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;span id=&#34;header-backdrop&#34; class=&#34;opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200&#34;&gt;&lt;/span&gt; intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;span id=&#34;header-backdrop&#34; class=&#34;opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200&#34;&gt;&lt;/span&gt; intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - &lt;span id=&#34;header-backdrop&#34; class=&#34;opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200&#34;&gt;&lt;/span&gt; intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+              
+                <img class="screenshot" src="step_screenshots/26_click_price_range_filter_and_set_from_427_to_727_failed.png" alt="Screenshot for stage 26">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>27</td>
+          <td>Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results</td>
+          <td>failed</td>
+          <td>32371.8</td>
+          <td>
+            
+              Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&#34;button[class*=&#39;15&#39;]&#34;).first
+    - locator resolved to &lt;button id=&#34;category-component-mobile-filter-open-btn&#34; class=&#34;lg:hidden hover:bg-[#EAEBED] border-[2px] border-solid border-[#151C28] rounded-[8px] p-[11px_24px] text-sm leading-[20px] font-medium text-[#151C28] flex gap-[4px] items-center justify-end transition-all duration-200 max-w-[148px] whitespace-nowrap&#34;&gt;Filter&lt;/button&gt;
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+              
+                <img class="screenshot" src="step_screenshots/27_click_classic_15_7_inch_soft_tip_dartboard_game_set_from_search_results_failed.png" alt="Screenshot for stage 27">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>28</td>
+          <td>Click on the selected product</td>
+          <td>passed</td>
+          <td>10085.7</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>29</td>
+          <td>Click on Bargain button to start bargaining</td>
+          <td>passed</td>
+          <td>5883.7</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>30</td>
+          <td>Enter bargain offer and submit</td>
+          <td>passed</td>
+          <td>2535.3</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>31</td>
+          <td>Enter bargain offer and submit</td>
+          <td>passed</td>
+          <td>2549.3</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>32</td>
+          <td>Wait for seller response to bargain offer</td>
+          <td>passed</td>
+          <td>3773.8</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>33</td>
+          <td>Enter another bargain offer and submit</td>
+          <td>passed</td>
+          <td>2536.9</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>34</td>
+          <td>Enter another bargain offer and submit</td>
+          <td>passed</td>
+          <td>2547.6</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>35</td>
+          <td>Wait for seller response to bargain offer</td>
+          <td>passed</td>
+          <td>3794.8</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>36</td>
+          <td>Enter final bargain offer and submit</td>
+          <td>passed</td>
+          <td>2549.2</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>37</td>
+          <td>Enter final bargain offer and submit</td>
+          <td>passed</td>
+          <td>2532.1</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>38</td>
+          <td>Wait for seller response to bargain offer</td>
+          <td>passed</td>
+          <td>3761.0</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>39</td>
+          <td>Click on Accept button to accept the final bargain offer</td>
+          <td>passed</td>
+          <td>4394.4</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>40</td>
+          <td>Click on Buy Now button</td>
+          <td>failed</td>
+          <td>32339.5</td>
+          <td>
+            
+              Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&#34;a[id*=&#39;buy&#39;]&#34;).first
+    - locator resolved to &lt;a href=&#34;/pages/terms-conditions-for-buyer&#34; id=&#34;footer-link-terms-conditions-for-buyer&#34; class=&#34;hover:underline text-[12px] leading-[16px] font-medium text-[#2A374F] hover:text-[#151c28]&#34;&gt;Terms &amp; Conditions&lt;/a&gt;
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+              
+                <img class="screenshot" src="step_screenshots/40_click_buy_now_button_failed.png" alt="Screenshot for stage 40">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>41</td>
+          <td>Click on Pay Online payment option</td>
+          <td>failed</td>
+          <td>1868.5</td>
+          <td>
+            
+              Target not found
+              
+                <img class="screenshot" src="step_screenshots/41_click_pay_online_payment_option_failed.png" alt="Screenshot for stage 41">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>42</td>
+          <td>Click on Pay button</td>
+          <td>failed</td>
+          <td>1816.3</td>
+          <td>
+            
+              Target not found
+              
+                <img class="screenshot" src="step_screenshots/42_click_pay_button_failed.png" alt="Screenshot for stage 42">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>43</td>
+          <td>Click on Net Banking option</td>
+          <td>failed</td>
+          <td>1835.5</td>
+          <td>
+            
+              Target not found
+              
+                <img class="screenshot" src="step_screenshots/43_click_net_banking_option_failed.png" alt="Screenshot for stage 43">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>44</td>
+          <td>Click on a bank from the list</td>
+          <td>failed</td>
+          <td>32332.6</td>
+          <td>
+            
+              Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&#34;button[class*=&#39;a&#39;]&#34;).first
+    - locator resolved to &lt;button type=&#34;button&#34; aria-haspopup=&#34;menu&#34; aria-expanded=&#34;false&#34; data-headlessui-state=&#34;&#34; id=&#34;location-desktop-menu-btn&#34; class=&#34;flex gap-[4px] items-center justify-end p-[8px] sm:p-[8px_12px] outline-none h-full  transition-all duration-200&#34;&gt;…&lt;/button&gt;
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - &lt;div id=&#34;search-request-modal-alignment&#34; class=&#34;flex min-h-full items-center justify-center p-4&#34;&gt;…&lt;/div&gt; from &lt;div id=&#34;headlessui-portal-root&#34;&gt;…&lt;/div&gt; subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+              
+                <img class="screenshot" src="step_screenshots/44_click_a_bank_from_the_list_failed.png" alt="Screenshot for stage 44">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>45</td>
+          <td>Click on Success button to confirm payment</td>
+          <td>failed</td>
+          <td>32375.7</td>
+          <td>
+            
+              Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&#34;button[class*=&#39;to&#39;]&#34;).first
+    - locator resolved to &lt;button id=&#34;search-no-result-request-btn&#34; class=&#34;mt-4 hover:shadow-[0px_2px_4px_0px_#FB7E0126] hover:before:bg-[#0000001A] before:absolute before:w-full before:h-full before:left-0 before:top-0 relative overflow-hidden focus:before:bg-[#00000033] before:transition-all before:duration-200 bg-[linear-gradient(90deg,_#F76B07_7.13%,_#FB7E03_100.13%)] p-[12px_16px] w-full max-w-fit h-[36px] sm:h-[50px] rounded-[8px] shadow-[0px_2px_4px_0px_#FB7E0126] text-[11px] sm:text-[16px] leading-[20px] font-medium te…&gt;…&lt;/button&gt;
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+              
+                <img class="screenshot" src="step_screenshots/45_click_success_button_to_confirm_payment_failed.png" alt="Screenshot for stage 45">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>46</td>
+          <td>Verify order details are displayed</td>
+          <td>failed</td>
+          <td>22344.8</td>
+          <td>
+            
+              Assertion text &#39;Verify order details are displayed&#39; not found or not visible
+              
+                <img class="screenshot" src="step_screenshots/46_assert_visible_verify_order_details_are_displayed_failed.png" alt="Screenshot for stage 46">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>47</td>
+          <td>Navigate to My Bargains section</td>
+          <td>passed</td>
+          <td>4355.7</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+        <tr class="status-failed">
+          <td>48</td>
+          <td>Verify the savings displayed</td>
+          <td>failed</td>
+          <td>22357.3</td>
+          <td>
+            
+              Assertion text &#39;Verify the savings displayed&#39; not found or not visible
+              
+                <img class="screenshot" src="step_screenshots/48_assert_visible_verify_the_savings_displayed_failed.png" alt="Screenshot for stage 48">
+              
+            
+          </td>
+        </tr>
+        
+        <tr class="status-passed">
+          <td>-</td>
+          <td>capture_state</td>
+          <td>passed</td>
+          <td>N/A</td>
+          <td>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('stepChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Passed', 'Failed', 'Skipped'],
+        datasets: [{
+          data: [28, 12, 1],
+          backgroundColor: ['#22a559', '#d64545', '#9aa0a6'],
+        }]
+      },
+      options: {
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  </script>
+</body>
+</html>

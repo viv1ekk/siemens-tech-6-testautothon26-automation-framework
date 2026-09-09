@@ -4,10 +4,21 @@
   "command": "playwright workflow: https://stg.gajab.com/",
   "execution_mode": "strict",
   "passed": false,
-  "title": "",
-  "final_url": "",
+  "title": "My Bargains | Gajab",
+  "final_url": "https://stg.gajab.com/my-bargains",
   "errors": [
-    "Page.wait_for_timeout: Target page, context or browser has been closed"
+    "Assertion text 'Verify location results are displayed' not found or not visible",
+    "Assertion text 'gajab deal of the day section is visible' not found or not visible",
+    "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[id*='price']\").first\n    - locator resolved to <button id=\"price-filter-website-accordion-toggle-btn\" class=\"px-[16px] w-full hover:bg-[#FB7E01]/20  transition-colors cursor-pointer   \">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+    "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='15']\").first\n    - locator resolved to <button id=\"category-component-mobile-filter-open-btn\" class=\"lg:hidden hover:bg-[#EAEBED] border-[2px] border-solid border-[#151C28] rounded-[8px] p-[11px_24px] text-sm leading-[20px] font-medium text-[#151C28] flex gap-[4px] items-center justify-end transition-all duration-200 max-w-[148px] whitespace-nowrap\">Filter</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+    "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"a[id*='buy']\").first\n    - locator resolved to <a href=\"/pages/terms-conditions-for-buyer\" id=\"footer-link-terms-conditions-for-buyer\" class=\"hover:underline text-[12px] leading-[16px] font-medium text-[#2A374F] hover:text-[#151c28]\">Terms & Conditions</a>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+    "Target not found",
+    "Target not found",
+    "Target not found",
+    "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='a']\").first\n    - locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-headlessui-state=\"\" id=\"location-desktop-menu-btn\" class=\"flex gap-[4px] items-center justify-end p-[8px] sm:p-[8px_12px] outline-none h-full  transition-all duration-200\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+    "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='to']\").first\n    - locator resolved to <button id=\"search-no-result-request-btn\" class=\"mt-4 hover:shadow-[0px_2px_4px_0px_#FB7E0126] hover:before:bg-[#0000001A] before:absolute before:w-full before:h-full before:left-0 before:top-0 relative overflow-hidden focus:before:bg-[#00000033] before:transition-all before:duration-200 bg-[linear-gradient(90deg,_#F76B07_7.13%,_#FB7E03_100.13%)] p-[12px_16px] w-full max-w-fit h-[36px] sm:h-[50px] rounded-[8px] shadow-[0px_2px_4px_0px_#FB7E0126] text-[11px] sm:text-[16px] leading-[20px] font-medium te\u2026>\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+    "Assertion text 'Verify order details are displayed' not found or not visible",
+    "Assertion text 'Verify the savings displayed' not found or not visible"
   ],
   "steps": [
     {
@@ -21,8 +32,9 @@
       "raw_step": "Launch browser",
       "details": {
         "navigation_url": "https://stg.gajab.com/",
-        "url_after_step": "https://stg.gajab.com/auth/signin",
-        "page_title_after_step": "Sign In | Gajab",
+        "duration_ms": 7659.8,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
         "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/01_goto_input_url_passed.png"
       }
     },
@@ -33,29 +45,787 @@
       "raw_step": "Navigate to url 'https://stg.gajab.com/'",
       "details": {
         "navigation_url": "https://stg.gajab.com/",
+        "duration_ms": 7506.2,
         "url_after_step": "https://stg.gajab.com/",
         "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
         "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/02_goto_input_url_passed.png"
       }
     },
     {
-      "step": "execution",
+      "step": "assert_visible:home page is visible",
+      "status": "passed",
+      "stage": 3,
+      "raw_step": "Verify that home page is visible",
+      "details": {
+        "assertion_attempts": [
+          "body_visible"
+        ],
+        "assert_text": "home page is visible",
+        "duration_ms": 3495.0,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/03_assert_visible_home_page_is_visible_passed.png"
+      }
+    },
+    {
+      "step": "click:Log in",
+      "status": "passed",
+      "stage": 4,
+      "raw_step": "Click on 'Log in' or 'Sign up' button",
+      "details": {
+        "locator_resolution": {
+          "source": "dynamic",
+          "strategy": "click",
+          "healed": false,
+          "matched": true
+        },
+        "duration_ms": 5896.0,
+        "url_after_step": "https://stg.gajab.com/auth/signin",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/04_click_log_in_passed.png"
+      }
+    },
+    {
+      "step": "assert_url_contains:signin",
+      "status": "passed",
+      "stage": 5,
+      "raw_step": "Verify url contains 'signin' after page loads",
+      "details": {
+        "expected_url_fragment": "signin",
+        "current_url": "https://stg.gajab.com/auth/signin",
+        "duration_ms": 3759.8,
+        "url_after_step": "https://stg.gajab.com/auth/signin",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/05_assert_url_contains_signin_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for the page to load completely and ensure all elements are visible",
+      "status": "passed",
+      "stage": 6,
+      "raw_step": "Wait for the page to load completely and ensure all elements are visible",
+      "details": {
+        "wait_for": "Wait for the page to load completely and ensure all elements are visible",
+        "duration_ms": 3759.2,
+        "url_after_step": "https://stg.gajab.com/auth/signin",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/06_wait_wait_for_the_page_to_load_completely_and_ensure_all_elements_are_visible_passed.png"
+      }
+    },
+    {
+      "step": "fill:random 10 digit mobile number in mobile field",
+      "status": "passed",
+      "stage": 7,
+      "raw_step": "Enter random 10 digit mobile number in mobile field",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "6227018176",
+        "fill_mode": "filled_text",
+        "duration_ms": 2569.6,
+        "url_after_step": "https://stg.gajab.com/auth/signin",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/07_fill_random_10_digit_mobile_number_in_mobile_field_passed.png"
+      }
+    },
+    {
+      "step": "check:terms and conditions",
+      "status": "passed",
+      "stage": 8,
+      "raw_step": "Click on the check box for terms and conditions",
+      "details": {
+        "locator_resolution": {},
+        "duration_ms": 2563.0,
+        "url_after_step": "https://stg.gajab.com/auth/signin",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/08_check_terms_and_conditions_passed.png"
+      }
+    },
+    {
+      "step": "click:Request OTP",
+      "status": "passed",
+      "stage": 9,
+      "raw_step": "Click 'Request OTP' button",
+      "details": {
+        "locator_resolution": {
+          "source": "dynamic",
+          "strategy": "click",
+          "healed": false,
+          "matched": true
+        },
+        "duration_ms": 4353.1,
+        "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/09_click_request_otp_passed.png"
+      }
+    },
+    {
+      "step": "fill:OTP '123456' in OTP field",
+      "status": "passed",
+      "stage": 10,
+      "raw_step": "Enter OTP '123456' in OTP field",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "123456",
+        "fill_mode": "filled_otp_group:6",
+        "duration_ms": 2757.3,
+        "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+        "page_title_after_step": "Sign In | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/10_fill_otp_123456_in_otp_field_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for account creation form page to appear",
+      "status": "passed",
+      "stage": 11,
+      "raw_step": "Wait for account creation form page to appear",
+      "details": {
+        "wait_for": "Wait for account creation form page to appear",
+        "duration_ms": 3754.1,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/11_wait_wait_for_account_creation_form_page_to_appear_passed.png"
+      }
+    },
+    {
+      "step": "fill:name 'Test User' in name field",
+      "status": "passed",
+      "stage": 12,
+      "raw_step": "Enter name 'Test User' in name field",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "Test User",
+        "fill_mode": "filled_text",
+        "duration_ms": 2538.2,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/12_fill_name_test_user_in_name_field_passed.png"
+      }
+    },
+    {
+      "step": "click:Male",
+      "status": "passed",
+      "stage": 13,
+      "raw_step": "Click on 'Male' button for gender selection",
+      "details": {
+        "locator_resolution": {
+          "source": "dynamic",
+          "strategy": "click",
+          "healed": false,
+          "matched": true
+        },
+        "duration_ms": 5875.5,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/13_click_male_passed.png"
+      }
+    },
+    {
+      "step": "click:Submit",
+      "status": "passed",
+      "stage": 14,
+      "raw_step": "Click on 'Submit' or 'Next' button to create account",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4379.4,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/14_click_submit_passed.png"
+      }
+    },
+    {
+      "step": "click:location dropdown or location search field",
+      "status": "passed",
+      "stage": 15,
+      "raw_step": "Click on location dropdown or location search field",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 5738.5,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/15_click_location_dropdown_or_location_search_field_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for location search field to become active",
+      "status": "passed",
+      "stage": 16,
+      "raw_step": "Wait for location search field to become active",
+      "details": {
+        "wait_for": "Wait for location search field to become active",
+        "duration_ms": 3764.1,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/16_wait_wait_for_location_search_field_to_become_active_passed.png"
+      }
+    },
+    {
+      "step": "fill:pin code '560001' in location search field",
+      "status": "passed",
+      "stage": 17,
+      "raw_step": "Enter pin code '560001' in location search field",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "560001",
+        "fill_mode": "filled_text",
+        "duration_ms": 2582.2,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/17_fill_pin_code_560001_in_location_search_field_passed.png"
+      }
+    },
+    {
+      "step": "assert_visible:Verify location results are displayed",
       "status": "failed",
-      "error": "Page.wait_for_timeout: Target page, context or browser has been closed"
+      "error": "Assertion text 'Verify location results are displayed' not found or not visible",
+      "stage": 18,
+      "raw_step": "Verify location results are displayed",
+      "details": {
+        "duration_ms": 22348.0,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/18_assert_visible_verify_location_results_are_displayed_failed.png"
+      }
+    },
+    {
+      "step": "select:Select the location from search results or dropdown",
+      "status": "skipped",
+      "error": "Select not found",
+      "stage": 19,
+      "raw_step": "Select the location from search results or dropdown",
+      "details": {
+        "locator_resolution": {
+          "source": "unresolved",
+          "strategy": "select",
+          "healed": false,
+          "matched": false
+        },
+        "duration_ms": 2078.3,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/19_select_select_the_location_from_search_results_or_dropdown_skipped.png"
+      }
+    },
+    {
+      "step": "assert_visible:gajab deal of the day section is visible",
+      "status": "failed",
+      "error": "Assertion text 'gajab deal of the day section is visible' not found or not visible",
+      "stage": 20,
+      "raw_step": "Verify that Gajab Deal of the Day section is visible",
+      "details": {
+        "duration_ms": 22360.4,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/20_assert_visible_gajab_deal_of_the_day_section_is_visible_failed.png"
+      }
+    },
+    {
+      "step": "click:share or email button for Deal of the Day product",
+      "status": "passed",
+      "stage": 21,
+      "raw_step": "Click share or email button for Deal of the Day product",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4422.9,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/21_click_share_or_email_button_for_deal_of_the_day_product_passed.png"
+      }
+    },
+    {
+      "step": "goto:input_url",
+      "status": "passed",
+      "stage": 22,
+      "raw_step": "Navigate to Trending Products section",
+      "details": {
+        "navigation_url": "https://stg.gajab.com/",
+        "duration_ms": 4645.1,
+        "url_after_step": "https://stg.gajab.com/",
+        "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/22_goto_input_url_passed.png"
+      }
+    },
+    {
+      "step": "click:view all link in just bargained product section",
+      "status": "passed",
+      "stage": 23,
+      "raw_step": "Click on View All link in Just Bargained Product section",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4410.8,
+        "url_after_step": "https://stg.gajab.com/product-list/all?widgetId=10&position=WP1&limit=48&orderBy=0",
+        "page_title_after_step": "All | Shop on Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/23_click_view_all_link_in_just_bargained_product_section_passed.png"
+      }
+    },
+    {
+      "step": "click:toys and games category tab",
+      "status": "passed",
+      "stage": 24,
+      "raw_step": "Click on Toys and Games category tab",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4431.2,
+        "url_after_step": "https://stg.gajab.com/product-list/all?widgetId=10&position=WP1&limit=48&orderBy=0",
+        "page_title_after_step": "All | Shop on Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/24_click_toys_and_games_category_tab_passed.png"
+      }
+    },
+    {
+      "step": "click:sera's basket brand from the left filter",
+      "status": "passed",
+      "stage": 25,
+      "raw_step": "Click on SERA'S BASKET brand from the left filter",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4404.9,
+        "url_after_step": "https://stg.gajab.com/product-list/all?widgetId=10&position=WP1&limit=48&orderBy=0",
+        "page_title_after_step": "All | Shop on Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/25_click_sera_s_basket_brand_from_the_left_filter_passed.png"
+      }
+    },
+    {
+      "step": "click:price range filter and set from 427 to 727",
+      "status": "failed",
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[id*='price']\").first\n    - locator resolved to <button id=\"price-filter-website-accordion-toggle-btn\" class=\"px-[16px] w-full hover:bg-[#FB7E01]/20  transition-colors cursor-pointer   \">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "stage": 26,
+      "raw_step": "Click on price range filter and set from 427 to 727",
+      "details": {
+        "duration_ms": 32366.6,
+        "url_after_step": "https://stg.gajab.com/product-list/all?widgetId=10&position=WP1&limit=48&orderBy=0",
+        "page_title_after_step": "All | Shop on Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/26_click_price_range_filter_and_set_from_427_to_727_failed.png"
+      }
+    },
+    {
+      "step": "click:classic 15.7 inch soft tip dartboard game set from search results",
+      "status": "failed",
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='15']\").first\n    - locator resolved to <button id=\"category-component-mobile-filter-open-btn\" class=\"lg:hidden hover:bg-[#EAEBED] border-[2px] border-solid border-[#151C28] rounded-[8px] p-[11px_24px] text-sm leading-[20px] font-medium text-[#151C28] flex gap-[4px] items-center justify-end transition-all duration-200 max-w-[148px] whitespace-nowrap\">Filter</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+      "stage": 27,
+      "raw_step": "Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results",
+      "details": {
+        "duration_ms": 32371.8,
+        "url_after_step": "https://stg.gajab.com/product-list/all?widgetId=10&position=WP1&limit=48&orderBy=0",
+        "page_title_after_step": "All | Shop on Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/27_click_classic_15_7_inch_soft_tip_dartboard_game_set_from_search_results_failed.png"
+      }
+    },
+    {
+      "step": "click:the selected product",
+      "status": "passed",
+      "stage": 28,
+      "raw_step": "Click on the selected product",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 10085.7,
+        "url_after_step": "https://stg.gajab.com/product-detail/self-draining-cutlery-holder-stand-plastic-tableware-storage-organizer-for-spoon-fork-knife-chopsticks-kitchen-countertop-dining-table/202601037596",
+        "page_title_after_step": "Self Draining Cutlery Holder Stand, Plastic Tableware Storage Organizer for Spoon, Fork, Knife, Chopsticks, Kitchen Countertop & Dining Table",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/28_click_the_selected_product_passed.png"
+      }
+    },
+    {
+      "step": "click:bargain button to start bargaining",
+      "status": "passed",
+      "stage": 29,
+      "raw_step": "Click on Bargain button to start bargaining",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 5883.7,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/29_click_bargain_button_to_start_bargaining_passed.png"
+      }
+    },
+    {
+      "step": "fill:bargain offer",
+      "status": "passed",
+      "stage": 30,
+      "raw_step": "Enter bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2535.3,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/30_fill_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "fill:submit",
+      "status": "passed",
+      "stage": 31,
+      "raw_step": "Enter bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2549.3,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/31_fill_submit_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for seller response to bargain offer",
+      "status": "passed",
+      "stage": 32,
+      "raw_step": "Wait for seller response to bargain offer",
+      "details": {
+        "wait_for": "Wait for seller response to bargain offer",
+        "duration_ms": 3773.8,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/32_wait_wait_for_seller_response_to_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "fill:another bargain offer",
+      "status": "passed",
+      "stage": 33,
+      "raw_step": "Enter another bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2536.9,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/33_fill_another_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "fill:submit",
+      "status": "passed",
+      "stage": 34,
+      "raw_step": "Enter another bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2547.6,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/34_fill_submit_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for seller response to bargain offer",
+      "status": "passed",
+      "stage": 35,
+      "raw_step": "Wait for seller response to bargain offer",
+      "details": {
+        "wait_for": "Wait for seller response to bargain offer",
+        "duration_ms": 3794.8,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/35_wait_wait_for_seller_response_to_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "fill:final bargain offer",
+      "status": "passed",
+      "stage": 36,
+      "raw_step": "Enter final bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2549.2,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/36_fill_final_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "fill:submit",
+      "status": "passed",
+      "stage": 37,
+      "raw_step": "Enter final bargain offer and submit",
+      "details": {
+        "locator_resolution": {
+          "source": "contextual",
+          "strategy": "fill",
+          "healed": false,
+          "matched": true
+        },
+        "filled_value": "sample input",
+        "fill_mode": "filled_text",
+        "duration_ms": 2532.1,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/37_fill_submit_passed.png"
+      }
+    },
+    {
+      "step": "wait:Wait for seller response to bargain offer",
+      "status": "passed",
+      "stage": 38,
+      "raw_step": "Wait for seller response to bargain offer",
+      "details": {
+        "wait_for": "Wait for seller response to bargain offer",
+        "duration_ms": 3761.0,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/38_wait_wait_for_seller_response_to_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "click:accept button to accept the final bargain offer",
+      "status": "passed",
+      "stage": 39,
+      "raw_step": "Click on Accept button to accept the final bargain offer",
+      "details": {
+        "locator_resolution": {
+          "source": "healing",
+          "strategy": "click",
+          "healed": true,
+          "matched": true
+        },
+        "duration_ms": 4394.4,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/39_click_accept_button_to_accept_the_final_bargain_offer_passed.png"
+      }
+    },
+    {
+      "step": "click:buy now button",
+      "status": "failed",
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"a[id*='buy']\").first\n    - locator resolved to <a href=\"/pages/terms-conditions-for-buyer\" id=\"footer-link-terms-conditions-for-buyer\" class=\"hover:underline text-[12px] leading-[16px] font-medium text-[#2A374F] hover:text-[#151c28]\">Terms & Conditions</a>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "stage": 40,
+      "raw_step": "Click on Buy Now button",
+      "details": {
+        "duration_ms": 32339.5,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/40_click_buy_now_button_failed.png"
+      }
+    },
+    {
+      "step": "click:pay online payment option",
+      "status": "failed",
+      "error": "Target not found",
+      "stage": 41,
+      "raw_step": "Click on Pay Online payment option",
+      "details": {
+        "locator_resolution": {
+          "source": "unresolved",
+          "strategy": "click",
+          "healed": false,
+          "matched": false
+        },
+        "duration_ms": 1868.5,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/41_click_pay_online_payment_option_failed.png"
+      }
+    },
+    {
+      "step": "click:pay button",
+      "status": "failed",
+      "error": "Target not found",
+      "stage": 42,
+      "raw_step": "Click on Pay button",
+      "details": {
+        "locator_resolution": {
+          "source": "unresolved",
+          "strategy": "click",
+          "healed": false,
+          "matched": false
+        },
+        "duration_ms": 1816.3,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/42_click_pay_button_failed.png"
+      }
+    },
+    {
+      "step": "click:net banking option",
+      "status": "failed",
+      "error": "Target not found",
+      "stage": 43,
+      "raw_step": "Click on Net Banking option",
+      "details": {
+        "locator_resolution": {
+          "source": "unresolved",
+          "strategy": "click",
+          "healed": false,
+          "matched": false
+        },
+        "duration_ms": 1835.5,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/43_click_net_banking_option_failed.png"
+      }
+    },
+    {
+      "step": "click:a bank from the list",
+      "status": "failed",
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='a']\").first\n    - locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-headlessui-state=\"\" id=\"location-desktop-menu-btn\" class=\"flex gap-[4px] items-center justify-end p-[8px] sm:p-[8px_12px] outline-none h-full  transition-all duration-200\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "stage": 44,
+      "raw_step": "Click on a bank from the list",
+      "details": {
+        "duration_ms": 32332.6,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/44_click_a_bank_from_the_list_failed.png"
+      }
+    },
+    {
+      "step": "click:success button to confirm payment",
+      "status": "failed",
+      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='to']\").first\n    - locator resolved to <button id=\"search-no-result-request-btn\" class=\"mt-4 hover:shadow-[0px_2px_4px_0px_#FB7E0126] hover:before:bg-[#0000001A] before:absolute before:w-full before:h-full before:left-0 before:top-0 relative overflow-hidden focus:before:bg-[#00000033] before:transition-all before:duration-200 bg-[linear-gradient(90deg,_#F76B07_7.13%,_#FB7E03_100.13%)] p-[12px_16px] w-full max-w-fit h-[36px] sm:h-[50px] rounded-[8px] shadow-[0px_2px_4px_0px_#FB7E0126] text-[11px] sm:text-[16px] leading-[20px] font-medium te\u2026>\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+      "stage": 45,
+      "raw_step": "Click on Success button to confirm payment",
+      "details": {
+        "duration_ms": 32375.7,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/45_click_success_button_to_confirm_payment_failed.png"
+      }
+    },
+    {
+      "step": "assert_visible:Verify order details are displayed",
+      "status": "failed",
+      "error": "Assertion text 'Verify order details are displayed' not found or not visible",
+      "stage": 46,
+      "raw_step": "Verify order details are displayed",
+      "details": {
+        "duration_ms": 22344.8,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/46_assert_visible_verify_order_details_are_displayed_failed.png"
+      }
+    },
+    {
+      "step": "goto:input_url",
+      "status": "passed",
+      "stage": 47,
+      "raw_step": "Navigate to My Bargains section",
+      "details": {
+        "navigation_url": "https://stg.gajab.com/my-bargains",
+        "duration_ms": 4355.7,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/47_goto_input_url_passed.png"
+      }
+    },
+    {
+      "step": "assert_visible:Verify the savings displayed",
+      "status": "failed",
+      "error": "Assertion text 'Verify the savings displayed' not found or not visible",
+      "stage": 48,
+      "raw_step": "Verify the savings displayed",
+      "details": {
+        "duration_ms": 22357.3,
+        "url_after_step": "https://stg.gajab.com/my-bargains",
+        "page_title_after_step": "My Bargains | Gajab",
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/48_assert_visible_verify_the_savings_displayed_failed.png"
+      }
+    },
+    {
+      "step": "capture_state",
+      "status": "passed",
+      "title": "My Bargains | Gajab",
+      "url": "https://stg.gajab.com/my-bargains"
     }
   ],
   "workflow_summary": {
     "planned": 48,
-    "executed": 2,
-    "passed": 2,
-    "failed": 0,
-    "skipped": 0
+    "executed": 41,
+    "passed": 28,
+    "failed": 12,
+    "skipped": 1
   },
   "locator_summary": {
-    "healed_steps": 0,
-    "direct_matches": 0,
+    "healed_steps": 9,
+    "direct_matches": 13,
     "discovery_lookup_matches": 0,
-    "unresolved": 0
+    "unresolved": 4
   },
   "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke",
   "step_screenshots_dir": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots"

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T14:51:48",
+  "generated_at": "2026-09-10T01:27:20",
   "scenario_name": "ui-smoke",
   "url": "https://stg.gajab.com/",
   "intent_type": "auth",
@@ -57,7 +57,7 @@
           "step_no": 7,
           "action": "fill",
           "target": "random 10 digit mobile number in mobile field",
-          "value": "8308038215",
+          "value": "6227018176",
           "source": "workflow"
         },
         {
