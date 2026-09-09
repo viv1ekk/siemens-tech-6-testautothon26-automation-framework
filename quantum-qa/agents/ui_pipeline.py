@@ -532,8 +532,10 @@ class UiPipelineAgent:
                     if self._visual_trace_enabled(ui_input):
                         print(f"[visual] Step {action.get('stage', '?')}: {action.get('raw_step', action.get('kind', 'Running step'))}")
                         page.wait_for_timeout(500)
+                    step_start = time.perf_counter()
                     result = self._run_workflow_action(page, discovery, action, ui_input, execution_context)
                     result.setdefault("details", {})
+                    result["details"]["duration_ms"] = round((time.perf_counter() - step_start) * 1000, 1)
                     result["details"]["url_after_step"] = page.url
                     result["details"]["page_title_after_step"] = page.title()
                     steps.append(result)
@@ -576,6 +578,7 @@ class UiPipelineAgent:
         }
         self._write_json(artifact_root / "ui_execution.json", execution)
         self._write_json(artifact_root / "workflow_plan.json", workflow)
+
         return execution
 
     def _fillable_elements(self, elements: list[dict]) -> list[dict]:

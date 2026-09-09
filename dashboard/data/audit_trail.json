@@ -1,18 +1,18 @@
 [
   {
     "agent": "UiPipeline",
-    "timestamp": "14:51:48",
+    "timestamp": "01:27:20",
     "scenario_name": "ui-smoke",
     "target_platform": "web",
-    "discovered_elements": 98,
+    "discovered_elements": 40,
     "planned_steps": 48,
-    "executed_steps": 4,
+    "executed_steps": 50,
     "passed": false,
-    "elapsed_s": 58.05
+    "elapsed_s": 527.59
   },
   {
     "agent": "BugReporter",
-    "bugs_reported": 1,
-    "timestamp": "14:51:48"
+    "bugs_reported": 12,
+    "timestamp": "01:27:20"
   }
 ]

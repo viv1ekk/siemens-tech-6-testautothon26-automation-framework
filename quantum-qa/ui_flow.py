@@ -14,6 +14,8 @@ import zipfile
 from pathlib import Path
 
 from agents.graph import build_graph
+from llm.client import SiemensLLMClient
+from reports.execution_report_builder import build_execution_report
 
 
 def _set_project_root_as_cwd() -> None:
@@ -66,7 +68,12 @@ def _generate_hackathon_artifacts(final_state: dict) -> None:
 
     execution_plan = _build_execution_plan(final_state)
     (execution_dir / "core_action_plan.json").write_text(json.dumps(execution_plan, indent=2), encoding="utf-8")
-    (execution_dir / "execution_result.json").write_text(json.dumps(final_state.get("ui_execution", {}), indent=2), encoding="utf-8")
+    ui_execution = final_state.get("ui_execution", {})
+    (execution_dir / "execution_result.json").write_text(json.dumps(ui_execution, indent=2), encoding="utf-8")
+    try:
+        build_execution_report(ui_execution, Path(ui_execution.get("artifact_root", "artifacts")))
+    except Exception:
+        pass
 
     bugs = _build_bug_reports(final_state)
     (bugs_dir / "bug_report.json").write_text(json.dumps({"bugs": bugs}, indent=2), encoding="utf-8")
@@ -131,6 +138,86 @@ def _build_generated_testcases(final_state: dict) -> dict:
             }
         ],
     }
+
+
+def _generate_negative_testcases(problem_statement: str) -> list[dict]:
+    """Call the Siemens LLM client to author 2 negative test cases per use case identified in the problem statement."""
+    problem_statement = str(problem_statement or "").strip()
+    if not problem_statement:
+        return []
+
+    try:
+        llm_client = SiemensLLMClient()
+    except ValueError:
+        return []
+
+    prompt = _build_negative_testcase_prompt(problem_statement)
+    try:
+        raw_response = llm_client.generate_llm_content(prompt)
+    except Exception:
+        return []
+
+    negative_cases: list[dict] = []
+    for counter, parsed_case in enumerate(_parse_negative_testcase_response(raw_response), start=1):
+        negative_cases.append(
+            {
+                "id": f"NEC-TC-{counter:03d}",
+                "title": parsed_case.get("title", ""),
+                "description": parsed_case.get("description", ""),
+                "expected_result": parsed_case.get("expected_result", ""),
+            }
+        )
+    return negative_cases
+
+
+def _build_negative_testcase_prompt(problem_statement: str) -> str:
+    return (
+        "Identify up to 5 distinct use cases described in the following problem statement, "
+        "then generate exactly 2 negative test cases for each identified use case.\n\n"
+        f"Problem Statement: {problem_statement}\n\n"
+        "Format strictly as a semicolon-separated list: "
+        "Title=<title>,Description=<description>,Expected Result=<expected result>; "
+        "Title=<title>,Description=<description>,Expected Result=<expected result>; ..."
+    )
+
+
+def _parse_negative_testcase_response(raw_response: str) -> list[dict]:
+    cases = []
+    for chunk in str(raw_response).split(";"):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        fields = {}
+        for part in chunk.split(","):
+            if "=" not in part:
+                continue
+            key, _, value = part.partition("=")
+            fields[key.strip().lower()] = value.strip()
+        title = fields.get("title", "")
+        description = fields.get("description", "")
+        expected_result = fields.get("expected result", "")
+        if title or description or expected_result:
+            cases.append({"title": title, "description": description, "expected_result": expected_result})
+    return cases
+
+
+def _write_negative_testcases_markdown(path: Path, negative_cases: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["# Negative Test Cases", "", f"- Generated at: {_now_iso()}", ""]
+    if not negative_cases:
+        lines.append("No negative test cases generated for this run.")
+    else:
+        for case in negative_cases:
+            lines.extend(
+                [
+                    f"## {case['id']}",
+                    f"- Title: {case.get('title', '')}",
+                    f"- Description: {case.get('description', '')}",
+                    f"- Expected Result: {case.get('expected_result', '')}",
+                    "",
+                ]
+            )
+    path.write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
 
 
 def _build_execution_plan(final_state: dict) -> dict:
@@ -468,6 +555,10 @@ def main():
         "keep_browser_open_ms": args.keep_browser_open_ms,
         "headed": args.headed,
     }
+
+    negative_test_cases = _generate_negative_testcases(problem_statement)
+    negative_testcases_path = Path("artifacts") / "testcases" / "negative_testcases.md"
+    _write_negative_testcases_markdown(negative_testcases_path, negative_test_cases)
 
     final_state = run_url_flow(ui_input)
     summary = {

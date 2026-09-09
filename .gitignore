@@ -1,1 +1,6 @@
 quantum-qa/.env
+.vscode/launch.json
+.gitignore
+.gitignore
+quantum-qa/agents/__pycache__/bug_reporter.cpython-313.pyc
+**__pycache__/
