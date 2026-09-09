@@ -1,1 +1,6 @@
 quantum-qa/.env
+*.pyc
+__pycache__/
+
+# Generated run artifacts
+artifacts/**

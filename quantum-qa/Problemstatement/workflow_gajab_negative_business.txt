@@ -1,0 +1,49 @@
+Test Case Pack: Gajab Business-Critical Negative Scenarios
+
+Website: https://stg.gajab.com/
+Test Data:
+- Valid OTP: '123456'
+- Invalid OTP: '111111'
+- Mobile Number: random 10 digit number
+- Name: Test User
+- Gender: Male
+- Non-serviceable Pin Code: '000000'
+
+Scenario 1: Block OTP request when Terms and Conditions is not accepted
+Business Impact: Prevents non-compliant account creation and legal exposure.
+1. Launch browser
+2. Navigate to url 'https://stg.gajab.com/'
+3. Verify that home page is visible
+4. Click on 'Log in' or 'Sign up' button
+5. Enter random 10 digit mobile number in mobile field
+6. Click 'Request OTP' button
+7. Verify terms and conditions error message is visible
+8. Verify sign in page is visible
+
+Scenario 2: Reject invalid OTP and prevent account creation
+Business Impact: Prevents fraudulent or unauthorized account access.
+9. Navigate to url 'https://stg.gajab.com/'
+10. Click on 'Log in' or 'Sign up' button
+11. Enter random 10 digit mobile number in mobile field
+12. Click on the check box for terms and conditions
+13. Click 'Request OTP' button
+14. Enter OTP '111111' in OTP field
+15. Click on 'Submit' or 'Next' button to verify OTP
+16. Verify invalid OTP error message is visible
+17. Verify sign in page is visible
+
+Scenario 3: Block unsupported location pin code
+Business Impact: Prevents failed fulfillment and reduces return/cancellation risk.
+18. Navigate to url 'https://stg.gajab.com/'
+19. Click on 'Log in' or 'Sign up' button
+20. Enter random 10 digit mobile number in mobile field
+21. Click on the check box for terms and conditions
+22. Click 'Request OTP' button
+23. Enter OTP '123456' in OTP field
+24. Wait for account creation form page to appear
+25. Enter name 'Test User' in name field
+26. Click on 'Male' button for gender selection
+27. Click on 'Submit' or 'Next' button to create account
+28. Click on location dropdown or location search field
+29. Enter pin code '000000' in location search field
+30. Verify location not serviceable message is visible
