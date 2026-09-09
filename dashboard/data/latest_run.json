@@ -1,5 +1,5 @@
 {
-  "commit_sha": "ui_1788983313",
+  "commit_sha": "ui_1788988107",
   "commit_diff": "",
   "risk_zones": {},
   "skill_plan": [],
@@ -19,19 +19,26 @@
   "audit_trail": [
     {
       "agent": "UiPipeline",
-      "timestamp": "01:27:20",
+      "timestamp": "02:47:09",
       "scenario_name": "ui-smoke",
       "target_platform": "web",
-      "discovered_elements": 40,
-      "planned_steps": 48,
-      "executed_steps": 50,
+      "discovered_elements": 99,
+      "planned_steps": 32,
+      "executed_steps": 34,
       "passed": false,
-      "elapsed_s": 527.59
+      "elapsed_s": 521.62
     },
     {
       "agent": "BugReporter",
-      "bugs_reported": 12,
-      "timestamp": "01:27:20"
+      "bugs_reported": 7,
+      "timestamp": "02:47:09"
+    },
+    {
+      "agent": "DashboardAgent",
+      "output": "artifacts/reports/hackathon_dashboard.html",
+      "failed_steps": 7,
+      "defects": 7,
+      "timestamp": "02:47:09"
     }
   ],
   "release_readiness_score": 100,
@@ -42,19 +49,20 @@
   "iteration": 0,
   "ui_input": {
     "url": "https://stg.gajab.com/",
-    "problem_statement": "\ufeffTest Case: Gajab End-to-End Customer Journey Automation\n\nWebsite: https://stg.gajab.com/\nTest Credentials:\n- Mobile Number: random 10 digit number\n- OTP: '123456'\n- Name: Test User\n- Gender: Male\n- Pin Code: '560001'\n- Email: qa.automation@gajab.com\n- Product Brand: SERA'S BASKET\n- Price Range: 427 to 727\n- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set\n- Payment Method: Net Banking\n\nSteps:\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Verify url contains 'signin' after page loads\n6. Wait for the page to load completely and ensure all elements are visible\n7. Enter random 10 digit mobile number in mobile field\n8. Click on the check box for terms and conditions\n9. Click 'Request OTP' button\n10. Enter OTP '123456' in OTP field\n11. Wait for account creation form page to appear\n12. Enter name 'Test User' in name field\n13. Click on 'Male' button for gender selection\n14. Click on 'Submit' or 'Next' button to create account\n15. Verify account created successfully message appears\n16. Click on location dropdown or location search field\n17. Wait for location search field to become active\n18. Enter pin code '560001' in location search field\n19. Verify location results are displayed\n20. Select the location from search results or dropdown\n21. Verify location is applied successfully\n22. Verify that Gajab Deal of the Day section is visible\n23. Capture the product name from Deal of the Day\n24. Capture the product image from Deal of the Day\n25. Capture the asking price from Deal of the Day\n26. Click share or email button for Deal of the Day product\n27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'\n28. Verify email sent confirmation message\n29. Navigate to Trending Products section\n30. Identify the most-bargained product under Trending Products\n31. Capture screenshot of the most-bargained product\n32. Scroll to Just Bargained section\n33. Capture the name and city of the latest live order\n34. Click on View All link in Just Bargained Product section\n35. Identify the cheapest product among the most-bargained products\n36. Click on Toys and Games category tab\n37. Click on SERA'S BASKET brand from the left filter\n38. Click on price range filter and set from 427 to 727\n39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results\n40. Click on the selected product\n41. Click on Bargain button to start bargaining\n42. Enter bargain offer and submit\n43. Wait for seller response to bargain offer\n44. Enter another bargain offer and submit\n45. Wait for seller response to bargain offer\n46. Enter final bargain offer and submit\n47. Wait for seller response to bargain offer\n48. Click on Accept button to accept the final bargain offer\n49. Click on Buy Now button\n50. Click on Pay Online payment option\n51. Click on Pay button\n52. Click on Net Banking option\n53. Click on a bank from the list\n54. Complete payment on bank portal\n55. Click on Success button to confirm payment\n56. Verify order placed successfully message\n57. Verify order details are displayed\n58. Navigate to My Bargains section\n59. Verify the savings displayed\n60. Verify bargained product is listed in My Bargains\n61. Verify deal details match the bargained offer\n62. Logout from the application\n63. Verify logout successful message",
+    "problem_statement": "Test Case Pack: Gajab Business-Critical Negative Scenarios\n\nWebsite: https://stg.gajab.com/\nTest Data:\n- Valid OTP: '123456'\n- Invalid OTP: '111111'\n- Mobile Number: random 10 digit number\n- Name: Test User\n- Gender: Male\n- Non-serviceable Pin Code: '000000'\n\nScenario 1: Block OTP request when Terms and Conditions is not accepted\nBusiness Impact: Prevents non-compliant account creation and legal exposure.\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Enter random 10 digit mobile number in mobile field\n6. Click 'Request OTP' button\n7. Verify terms and conditions error message is visible\n8. Verify sign in page is visible\n\nScenario 2: Reject invalid OTP and prevent account creation\nBusiness Impact: Prevents fraudulent or unauthorized account access.\n9. Navigate to url 'https://stg.gajab.com/'\n10. Click on 'Log in' or 'Sign up' button\n11. Enter random 10 digit mobile number in mobile field\n12. Click on the check box for terms and conditions\n13. Click 'Request OTP' button\n14. Enter OTP '111111' in OTP field\n15. Click on 'Submit' or 'Next' button to verify OTP\n16. Verify invalid OTP error message is visible\n17. Verify sign in page is visible\n\nScenario 3: Block unsupported location pin code\nBusiness Impact: Prevents failed fulfillment and reduces return/cancellation risk.\n18. Navigate to url 'https://stg.gajab.com/'\n19. Click on 'Log in' or 'Sign up' button\n20. Enter random 10 digit mobile number in mobile field\n21. Click on the check box for terms and conditions\n22. Click 'Request OTP' button\n23. Enter OTP '123456' in OTP field\n24. Wait for account creation form page to appear\n25. Enter name 'Test User' in name field\n26. Click on 'Male' button for gender selection\n27. Click on 'Submit' or 'Next' button to create account\n28. Click on location dropdown or location search field\n29. Enter pin code '000000' in location search field\n30. Verify location not serviceable message is visible",
     "target_platform": "web",
     "scenario_name": "ui-smoke",
     "execution_mode": "auto",
     "run_profile": "demo",
     "step_pause_ms": 1200,
     "keep_browser_open_ms": 2500,
-    "headed": true
+    "headed": true,
+    "nfr_only": false
   },
   "llm_interpretation": {
     "intent_type": "auth",
     "strict_mode": true,
-    "business_goal": "\ufeffTest Case: Gajab End-to-End Customer Journey Automation\n\nWebsite: https://stg.gajab.com/\nTest Credentials:\n- Mobile Number: random 10 digit number\n- OTP: '123456'\n- Name: Test User\n- Gender: Male\n- Pin Code: '560001'\n- Email: qa.automation@gajab.com\n- Product Brand: SERA'S BASKET\n- Price Range: 427 to 727\n- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set\n- Payment Method: Net Banking\n\nSteps:\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Verify url contains 'signin' after page loads\n6. Wait for the page to load completely and ensure all elements are visible\n7. Enter random 10 digit mobile number in mobile field\n8. Click on the check box for terms and conditions\n9. Click 'Request OTP' button\n10. Enter OTP '123456' in OTP field\n11. Wait for account creation form page to appear\n12. Enter name 'Test User' in name field\n13. Click on 'Male' button for gender selection\n14. Click on 'Submit' or 'Next' button to create account\n15. Verify account created successfully message appears\n16. Click on location dropdown or location search field\n17. Wait for location search field to become active\n18. Enter pin code '560001' in location search field\n19. Verify location results are displayed\n20. Select the location from search results or dropdown\n21. Verify location is applied successfully\n22. Verify that Gajab Deal of the Day section is visible\n23. Capture the product name from Deal of the Day\n24. Capture the product image from Deal of the Day\n25. Capture the asking price from Deal of the Day\n26. Click share or email button for Deal of the Day product\n27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'\n28. Verify email sent confirmation message\n29. Navigate to Trending Products section\n30. Identify the most-bargained product under Trending Products\n31. Capture screenshot of the most-bargained product\n32. Scroll to Just Bargained section\n33. Capture the name and city of the latest live order\n34. Click on View All link in Just Bargained Product section\n35. Identify the cheapest product among the most-bargained products\n36. Click on Toys and Games category tab\n37. Click on SERA'S BASKET brand from the left filter\n38. Click on price range filter and set from 427 to 727\n39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results\n40. Click on the selected product\n41. Click on Bargain button to start bargaining\n42. Enter bargain offer and submit\n43. Wait for seller response to bargain offer\n44. Enter another bargain offer and submit\n45. Wait for seller response to bargain offer\n46. Enter final bargain offer and submit\n47. Wait for seller response to bargain offer\n48. Click on Accept button to accept the final bargain offer\n49. Click on Buy Now button\n50. Click on Pay Online payment option\n51. Click on Pay button\n52. Click on Net Banking option\n53. Click on a bank from the list\n54. Complete payment on bank portal\n55. Click on Success button to confirm payment\n56. Verify order placed successfully message\n57. Verify order details are displayed\n58. Navigate to My Bargains section\n59. Verify the savings displayed\n60. Verify bargained product is listed in My Bargains\n61. Verify deal details match the bargained offer\n62. Logout from the application\n63. Verify logout successful message",
+    "business_goal": "Test Case Pack: Gajab Business-Critical Negative Scenarios\n\nWebsite: https://stg.gajab.com/\nTest Data:\n- Valid OTP: '123456'\n- Invalid OTP: '111111'\n- Mobile Number: random 10 digit number\n- Name: Test User\n- Gender: Male\n- Non-serviceable Pin Code: '000000'\n\nScenario 1: Block OTP request when Terms and Conditions is not accepted\nBusiness Impact: Prevents non-compliant account creation and legal exposure.\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Enter random 10 digit mobile number in mobile field\n6. Click 'Request OTP' button\n7. Verify terms and conditions error message is visible\n8. Verify sign in page is visible\n\nScenario 2: Reject invalid OTP and prevent account creation\nBusiness Impact: Prevents fraudulent or unauthorized account access.\n9. Navigate to url 'https://stg.gajab.com/'\n10. Click on 'Log in' or 'Sign up' button\n11. Enter random 10 digit mobile number in mobile field\n12. Click on the check box for terms and conditions\n13. Click 'Request OTP' button\n14. Enter OTP '111111' in OTP field\n15. Click on 'Submit' or 'Next' button to verify OTP\n16. Verify invalid OTP error message is visible\n17. Verify sign in page is visible\n\nScenario 3: Block unsupported location pin code\nBusiness Impact: Prevents failed fulfillment and reduces return/cancellation risk.\n18. Navigate to url 'https://stg.gajab.com/'\n19. Click on 'Log in' or 'Sign up' button\n20. Enter random 10 digit mobile number in mobile field\n21. Click on the check box for terms and conditions\n22. Click 'Request OTP' button\n23. Enter OTP '123456' in OTP field\n24. Wait for account creation form page to appear\n25. Enter name 'Test User' in name field\n26. Click on 'Male' button for gender selection\n27. Click on 'Submit' or 'Next' button to create account\n28. Click on location dropdown or location search field\n29. Enter pin code '000000' in location search field\n30. Verify location not serviceable message is visible",
     "steps": [],
     "assertions": [],
     "required_test_skills": [],
@@ -67,7 +75,7 @@
   "ui_discovery": {
     "status": "generated",
     "url": "https://stg.gajab.com/",
-    "problem_statement": "\ufeffTest Case: Gajab End-to-End Customer Journey Automation\n\nWebsite: https://stg.gajab.com/\nTest Credentials:\n- Mobile Number: random 10 digit number\n- OTP: '123456'\n- Name: Test User\n- Gender: Male\n- Pin Code: '560001'\n- Email: qa.automation@gajab.com\n- Product Brand: SERA'S BASKET\n- Price Range: 427 to 727\n- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set\n- Payment Method: Net Banking\n\nSteps:\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Verify url contains 'signin' after page loads\n6. Wait for the page to load completely and ensure all elements are visible\n7. Enter random 10 digit mobile number in mobile field\n8. Click on the check box for terms and conditions\n9. Click 'Request OTP' button\n10. Enter OTP '123456' in OTP field\n11. Wait for account creation form page to appear\n12. Enter name 'Test User' in name field\n13. Click on 'Male' button for gender selection\n14. Click on 'Submit' or 'Next' button to create account\n15. Verify account created successfully message appears\n16. Click on location dropdown or location search field\n17. Wait for location search field to become active\n18. Enter pin code '560001' in location search field\n19. Verify location results are displayed\n20. Select the location from search results or dropdown\n21. Verify location is applied successfully\n22. Verify that Gajab Deal of the Day section is visible\n23. Capture the product name from Deal of the Day\n24. Capture the product image from Deal of the Day\n25. Capture the asking price from Deal of the Day\n26. Click share or email button for Deal of the Day product\n27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'\n28. Verify email sent confirmation message\n29. Navigate to Trending Products section\n30. Identify the most-bargained product under Trending Products\n31. Capture screenshot of the most-bargained product\n32. Scroll to Just Bargained section\n33. Capture the name and city of the latest live order\n34. Click on View All link in Just Bargained Product section\n35. Identify the cheapest product among the most-bargained products\n36. Click on Toys and Games category tab\n37. Click on SERA'S BASKET brand from the left filter\n38. Click on price range filter and set from 427 to 727\n39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results\n40. Click on the selected product\n41. Click on Bargain button to start bargaining\n42. Enter bargain offer and submit\n43. Wait for seller response to bargain offer\n44. Enter another bargain offer and submit\n45. Wait for seller response to bargain offer\n46. Enter final bargain offer and submit\n47. Wait for seller response to bargain offer\n48. Click on Accept button to accept the final bargain offer\n49. Click on Buy Now button\n50. Click on Pay Online payment option\n51. Click on Pay button\n52. Click on Net Banking option\n53. Click on a bank from the list\n54. Complete payment on bank portal\n55. Click on Success button to confirm payment\n56. Verify order placed successfully message\n57. Verify order details are displayed\n58. Navigate to My Bargains section\n59. Verify the savings displayed\n60. Verify bargained product is listed in My Bargains\n61. Verify deal details match the bargained offer\n62. Logout from the application\n63. Verify logout successful message",
+    "problem_statement": "Test Case Pack: Gajab Business-Critical Negative Scenarios\n\nWebsite: https://stg.gajab.com/\nTest Data:\n- Valid OTP: '123456'\n- Invalid OTP: '111111'\n- Mobile Number: random 10 digit number\n- Name: Test User\n- Gender: Male\n- Non-serviceable Pin Code: '000000'\n\nScenario 1: Block OTP request when Terms and Conditions is not accepted\nBusiness Impact: Prevents non-compliant account creation and legal exposure.\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Enter random 10 digit mobile number in mobile field\n6. Click 'Request OTP' button\n7. Verify terms and conditions error message is visible\n8. Verify sign in page is visible\n\nScenario 2: Reject invalid OTP and prevent account creation\nBusiness Impact: Prevents fraudulent or unauthorized account access.\n9. Navigate to url 'https://stg.gajab.com/'\n10. Click on 'Log in' or 'Sign up' button\n11. Enter random 10 digit mobile number in mobile field\n12. Click on the check box for terms and conditions\n13. Click 'Request OTP' button\n14. Enter OTP '111111' in OTP field\n15. Click on 'Submit' or 'Next' button to verify OTP\n16. Verify invalid OTP error message is visible\n17. Verify sign in page is visible\n\nScenario 3: Block unsupported location pin code\nBusiness Impact: Prevents failed fulfillment and reduces return/cancellation risk.\n18. Navigate to url 'https://stg.gajab.com/'\n19. Click on 'Log in' or 'Sign up' button\n20. Enter random 10 digit mobile number in mobile field\n21. Click on the check box for terms and conditions\n22. Click 'Request OTP' button\n23. Enter OTP '123456' in OTP field\n24. Wait for account creation form page to appear\n25. Enter name 'Test User' in name field\n26. Click on 'Male' button for gender selection\n27. Click on 'Submit' or 'Next' button to create account\n28. Click on location dropdown or location search field\n29. Enter pin code '000000' in location search field\n30. Verify location not serviceable message is visible",
     "target_platform": "web",
     "scenario_name": "ui-smoke",
     "page_title": "Ui Smoke",
@@ -128,6 +136,18 @@
         "selector": {
           "strategy": "css",
           "value": "#header-search-input"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "search_no_result_request_btn",
+        "kind": "action",
+        "tag": "button",
+        "type": "submit",
+        "selector": {
+          "strategy": "css",
+          "value": "#search-no-result-request-btn"
         },
         "source": "css",
         "confidence": 0.99
@@ -899,68 +919,429 @@
         "stage": 41
       },
       {
-        "kind": "click",
-        "target": "pay button",
-        "resolved_element": "",
-        "required": true,
-        "raw_step": "Click on Pay button",
-        "stage": 42
+        "name": "footer_app_store_btn",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-app-store-btn"
+        },
+        "source": "css",
+        "confidence": 0.99
       },
       {
-        "kind": "click",
-        "target": "net banking option",
-        "resolved_element": "",
-        "required": true,
-        "raw_step": "Click on Net Banking option",
-        "stage": 43
+        "name": "footer_play_store_btn",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-play-store-btn"
+        },
+        "source": "css",
+        "confidence": 0.99
       },
       {
-        "kind": "click",
-        "target": "a bank from the list",
-        "resolved_element": "",
-        "required": true,
-        "raw_step": "Click on a bank from the list",
-        "stage": 44
+        "name": "footer_phone_link",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-phone-link"
+        },
+        "source": "css",
+        "confidence": 0.99
       },
       {
-        "kind": "click",
-        "target": "success button to confirm payment",
-        "resolved_element": "",
-        "required": true,
-        "raw_step": "Click on Success button to confirm payment",
-        "stage": 45
+        "name": "footer_email_link",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-email-link"
+        },
+        "source": "css",
+        "confidence": 0.99
       },
       {
-        "kind": "assert_visible",
-        "target": "Verify order details are displayed",
-        "assert_text": "Verify order details are displayed",
-        "required": true,
-        "raw_step": "Verify order details are displayed",
-        "stage": 46
+        "name": "footer_social_instagram",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-social-instagram"
+        },
+        "source": "css",
+        "confidence": 0.99
       },
+      {
+        "name": "footer_social_facebook",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-social-facebook"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "footer_social_twitter",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-social-twitter"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "footer_social_youtube",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-social-youtube"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "footer_social_linkedin",
+        "kind": "action",
+        "tag": "a",
+        "type": "",
+        "selector": {
+          "strategy": "css",
+          "value": "#footer-social-linkedin"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "back_to_top_btn",
+        "kind": "action",
+        "tag": "button",
+        "type": "button",
+        "selector": {
+          "strategy": "css",
+          "value": "#back-to-top-btn"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "location_desktop_dropdown_close_btn",
+        "kind": "action",
+        "tag": "button",
+        "type": "button",
+        "selector": {
+          "strategy": "css",
+          "value": "#location-desktop-dropdown-close-btn"
+        },
+        "source": "css",
+        "confidence": 0.99
+      },
+      {
+        "name": "location_desktop_search_input",
+        "kind": "input",
+        "tag": "input",
+        "type": "text",
+        "selector": {
+          "strategy": "css",
+          "value": "#location-desktop-search-input"
+        },
+        "source": "css",
+        "confidence": 0.99
+      }
+    ],
+    "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke"
+  },
+  "ui_workflow": {
+    "status": "generated",
+    "workflow_type": "requirement_driven",
+    "source": "ui_problem_statement",
+    "actions": [
       {
         "kind": "goto",
         "target": "input_url",
         "url": "",
         "required": true,
-        "raw_step": "Navigate to My Bargains section",
-        "stage": 47
+        "raw_step": "Launch browser",
+        "stage": 1
+      },
+      {
+        "kind": "goto",
+        "target": "input_url",
+        "url": "https://stg.gajab.com/",
+        "required": true,
+        "raw_step": "Navigate to url 'https://stg.gajab.com/'",
+        "stage": 2
       },
       {
         "kind": "assert_visible",
-        "target": "Verify the savings displayed",
-        "assert_text": "Verify the savings displayed",
+        "target": "home page is visible",
+        "assert_text": "home page is visible",
         "required": true,
-        "raw_step": "Verify the savings displayed",
-        "stage": 48
+        "raw_step": "Verify that home page is visible",
+        "stage": 3
+      },
+      {
+        "kind": "click",
+        "target": "Log in",
+        "resolved_element": "header_logo_link",
+        "required": true,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "stage": 4
+      },
+      {
+        "kind": "fill",
+        "target": "random 10 digit mobile number in mobile field",
+        "resolved_element": "",
+        "value": "7168805018",
+        "required": true,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "stage": 5
+      },
+      {
+        "kind": "click",
+        "target": "Request OTP",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click 'Request OTP' button",
+        "stage": 6
+      },
+      {
+        "kind": "assert_visible",
+        "target": "Verify terms and conditions error message is visible",
+        "assert_text": "Verify terms and conditions error message is visible",
+        "required": true,
+        "raw_step": "Verify terms and conditions error message is visible",
+        "stage": 7
+      },
+      {
+        "kind": "assert_visible",
+        "target": "Verify sign in page is visible",
+        "assert_text": "Verify sign in page is visible",
+        "required": true,
+        "raw_step": "Verify sign in page is visible",
+        "stage": 8
+      },
+      {
+        "kind": "goto",
+        "target": "input_url",
+        "url": "https://stg.gajab.com/",
+        "required": true,
+        "raw_step": "Navigate to url 'https://stg.gajab.com/'",
+        "stage": 9
+      },
+      {
+        "kind": "click",
+        "target": "Log in",
+        "resolved_element": "header_logo_link",
+        "required": true,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "stage": 10
+      },
+      {
+        "kind": "fill",
+        "target": "random 10 digit mobile number in mobile field",
+        "resolved_element": "",
+        "value": "9476358281",
+        "required": true,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "stage": 11
+      },
+      {
+        "kind": "check",
+        "target": "terms and conditions",
+        "resolved_element": "",
+        "required": false,
+        "raw_step": "Click on the check box for terms and conditions",
+        "stage": 12
+      },
+      {
+        "kind": "click",
+        "target": "Request OTP",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click 'Request OTP' button",
+        "stage": 13
+      },
+      {
+        "kind": "fill",
+        "target": "OTP '111111' in OTP field",
+        "resolved_element": "",
+        "value": "111111",
+        "required": true,
+        "raw_step": "Enter OTP '111111' in OTP field",
+        "stage": 14
+      },
+      {
+        "kind": "click",
+        "target": "Submit",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click on 'Submit' or 'Next' button to verify OTP",
+        "stage": 15
+      },
+      {
+        "kind": "assert_visible",
+        "target": "Verify invalid OTP error message is visible",
+        "assert_text": "Verify invalid OTP error message is visible",
+        "required": true,
+        "raw_step": "Verify invalid OTP error message is visible",
+        "stage": 16
+      },
+      {
+        "kind": "assert_visible",
+        "target": "Verify sign in page is visible",
+        "assert_text": "Verify sign in page is visible",
+        "required": true,
+        "raw_step": "Verify sign in page is visible",
+        "stage": 17
+      },
+      {
+        "kind": "fill",
+        "target": "Prevents failed fulfillment",
+        "resolved_element": "",
+        "value": "sample input",
+        "required": true,
+        "raw_step": "Business Impact: Prevents failed fulfillment and reduces return/cancellation risk.",
+        "stage": 18
+      },
+      {
+        "kind": "fill",
+        "target": "reduces return/cancellation risk",
+        "resolved_element": "",
+        "value": "sample input",
+        "required": true,
+        "raw_step": "Business Impact: Prevents failed fulfillment and reduces return/cancellation risk.",
+        "stage": 19
+      },
+      {
+        "kind": "goto",
+        "target": "input_url",
+        "url": "https://stg.gajab.com/",
+        "required": true,
+        "raw_step": "Navigate to url 'https://stg.gajab.com/'",
+        "stage": 20
+      },
+      {
+        "kind": "click",
+        "target": "Log in",
+        "resolved_element": "header_logo_link",
+        "required": true,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "stage": 21
+      },
+      {
+        "kind": "fill",
+        "target": "random 10 digit mobile number in mobile field",
+        "resolved_element": "",
+        "value": "9015701644",
+        "required": true,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "stage": 22
+      },
+      {
+        "kind": "check",
+        "target": "terms and conditions",
+        "resolved_element": "",
+        "required": false,
+        "raw_step": "Click on the check box for terms and conditions",
+        "stage": 23
+      },
+      {
+        "kind": "click",
+        "target": "Request OTP",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click 'Request OTP' button",
+        "stage": 24
+      },
+      {
+        "kind": "fill",
+        "target": "OTP '123456' in OTP field",
+        "resolved_element": "",
+        "value": "123456",
+        "required": true,
+        "raw_step": "Enter OTP '123456' in OTP field",
+        "stage": 25
+      },
+      {
+        "kind": "wait",
+        "target": "Wait for account creation form page to appear",
+        "wait_type": "assert_visible",
+        "required": false,
+        "raw_step": "Wait for account creation form page to appear",
+        "stage": 26
+      },
+      {
+        "kind": "fill",
+        "target": "name 'Test User' in name field",
+        "resolved_element": "",
+        "value": "Test User",
+        "required": true,
+        "raw_step": "Enter name 'Test User' in name field",
+        "stage": 27
+      },
+      {
+        "kind": "click",
+        "target": "Male",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click on 'Male' button for gender selection",
+        "stage": 28
+      },
+      {
+        "kind": "click",
+        "target": "Submit",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click on 'Submit' or 'Next' button to create account",
+        "stage": 29
+      },
+      {
+        "kind": "click",
+        "target": "location dropdown or location search field",
+        "resolved_element": "",
+        "required": true,
+        "raw_step": "Click on location dropdown or location search field",
+        "stage": 30
+      },
+      {
+        "kind": "fill",
+        "target": "pin code '000000' in location search field",
+        "resolved_element": "",
+        "value": "000000",
+        "required": true,
+        "raw_step": "Enter pin code '000000' in location search field",
+        "stage": 31
+      },
+      {
+        "kind": "assert_visible",
+        "target": "Verify location not serviceable message is visible",
+        "assert_text": "Verify location not serviceable message is visible",
+        "required": true,
+        "raw_step": "Verify location not serviceable message is visible",
+        "stage": 32
       }
     ],
-    "total_actions": 48,
+    "total_actions": 32,
     "execution_mode": "strict",
     "intent": {
       "intent_type": "auth",
       "strict_mode": true,
-      "business_goal": "\ufeffTest Case: Gajab End-to-End Customer Journey Automation\n\nWebsite: https://stg.gajab.com/\nTest Credentials:\n- Mobile Number: random 10 digit number\n- OTP: '123456'\n- Name: Test User\n- Gender: Male\n- Pin Code: '560001'\n- Email: qa.automation@gajab.com\n- Product Brand: SERA'S BASKET\n- Price Range: 427 to 727\n- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set\n- Payment Method: Net Banking\n\nSteps:\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Verify url contains 'signin' after page loads\n6. Wait for the page to load completely and ensure all elements are visible\n7. Enter random 10 digit mobile number in mobile field\n8. Click on the check box for terms and conditions\n9. Click 'Request OTP' button\n10. Enter OTP '123456' in OTP field\n11. Wait for account creation form page to appear\n12. Enter name 'Test User' in name field\n13. Click on 'Male' button for gender selection\n14. Click on 'Submit' or 'Next' button to create account\n15. Verify account created successfully message appears\n16. Click on location dropdown or location search field\n17. Wait for location search field to become active\n18. Enter pin code '560001' in location search field\n19. Verify location results are displayed\n20. Select the location from search results or dropdown\n21. Verify location is applied successfully\n22. Verify that Gajab Deal of the Day section is visible\n23. Capture the product name from Deal of the Day\n24. Capture the product image from Deal of the Day\n25. Capture the asking price from Deal of the Day\n26. Click share or email button for Deal of the Day product\n27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'\n28. Verify email sent confirmation message\n29. Navigate to Trending Products section\n30. Identify the most-bargained product under Trending Products\n31. Capture screenshot of the most-bargained product\n32. Scroll to Just Bargained section\n33. Capture the name and city of the latest live order\n34. Click on View All link in Just Bargained Product section\n35. Identify the cheapest product among the most-bargained products\n36. Click on Toys and Games category tab\n37. Click on SERA'S BASKET brand from the left filter\n38. Click on price range filter and set from 427 to 727\n39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results\n40. Click on the selected product\n41. Click on Bargain button to start bargaining\n42. Enter bargain offer and submit\n43. Wait for seller response to bargain offer\n44. Enter another bargain offer and submit\n45. Wait for seller response to bargain offer\n46. Enter final bargain offer and submit\n47. Wait for seller response to bargain offer\n48. Click on Accept button to accept the final bargain offer\n49. Click on Buy Now button\n50. Click on Pay Online payment option\n51. Click on Pay button\n52. Click on Net Banking option\n53. Click on a bank from the list\n54. Complete payment on bank portal\n55. Click on Success button to confirm payment\n56. Verify order placed successfully message\n57. Verify order details are displayed\n58. Navigate to My Bargains section\n59. Verify the savings displayed\n60. Verify bargained product is listed in My Bargains\n61. Verify deal details match the bargained offer\n62. Logout from the application\n63. Verify logout successful message",
+      "business_goal": "Test Case Pack: Gajab Business-Critical Negative Scenarios\n\nWebsite: https://stg.gajab.com/\nTest Data:\n- Valid OTP: '123456'\n- Invalid OTP: '111111'\n- Mobile Number: random 10 digit number\n- Name: Test User\n- Gender: Male\n- Non-serviceable Pin Code: '000000'\n\nScenario 1: Block OTP request when Terms and Conditions is not accepted\nBusiness Impact: Prevents non-compliant account creation and legal exposure.\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Enter random 10 digit mobile number in mobile field\n6. Click 'Request OTP' button\n7. Verify terms and conditions error message is visible\n8. Verify sign in page is visible\n\nScenario 2: Reject invalid OTP and prevent account creation\nBusiness Impact: Prevents fraudulent or unauthorized account access.\n9. Navigate to url 'https://stg.gajab.com/'\n10. Click on 'Log in' or 'Sign up' button\n11. Enter random 10 digit mobile number in mobile field\n12. Click on the check box for terms and conditions\n13. Click 'Request OTP' button\n14. Enter OTP '111111' in OTP field\n15. Click on 'Submit' or 'Next' button to verify OTP\n16. Verify invalid OTP error message is visible\n17. Verify sign in page is visible\n\nScenario 3: Block unsupported location pin code\nBusiness Impact: Prevents failed fulfillment and reduces return/cancellation risk.\n18. Navigate to url 'https://stg.gajab.com/'\n19. Click on 'Log in' or 'Sign up' button\n20. Enter random 10 digit mobile number in mobile field\n21. Click on the check box for terms and conditions\n22. Click 'Request OTP' button\n23. Enter OTP '123456' in OTP field\n24. Wait for account creation form page to appear\n25. Enter name 'Test User' in name field\n26. Click on 'Male' button for gender selection\n27. Click on 'Submit' or 'Next' button to create account\n28. Click on location dropdown or location search field\n29. Enter pin code '000000' in location search field\n30. Verify location not serviceable message is visible",
       "steps": [],
       "assertions": [],
       "required_test_skills": [],
@@ -2128,6 +2509,50 @@
           "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/44_click_a_bank_from_the_list_failed.png"
         }
       },
+      "back_to_top_btn": {
+        "strategy": "css",
+        "value": "#back-to-top-btn"
+      },
+      "location_desktop_dropdown_close_btn": {
+        "strategy": "css",
+        "value": "#location-desktop-dropdown-close-btn"
+      },
+      "location_desktop_login_link": {
+        "strategy": "css",
+        "value": "#location-desktop-login-link"
+      },
+      "location_desktop_search_input": {
+        "strategy": "css",
+        "value": "#location-desktop-search-input"
+      }
+    }
+  },
+  "ui_test_layer": {
+    "status": "generated",
+    "test_file": "artifacts/ui_generated/stg_gajab_com/ui_smoke/tests/test_ui_smoke.spec.ts",
+    "framework": "playwright",
+    "scenario_name": "ui-smoke",
+    "page_object": "UiSmokePage",
+    "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke"
+  },
+  "ui_execution": {
+    "status": "generated",
+    "runner": "playwright",
+    "command": "playwright workflow: https://stg.gajab.com/",
+    "execution_mode": "strict",
+    "passed": false,
+    "title": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+    "final_url": "https://stg.gajab.com/",
+    "errors": [
+      "Assertion text 'Verify terms and conditions error message is visible' not found or not visible",
+      "Assertion text 'Verify sign in page is visible' not found or not visible",
+      "Assertion text 'Verify invalid OTP error message is visible' not found or not visible",
+      "Assertion text 'Verify sign in page is visible' not found or not visible",
+      "Target not found",
+      "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#otp-submit-btn\")\n",
+      "Assertion text 'Verify location not serviceable message is visible' not found or not visible"
+    ],
+    "steps": [
       {
         "step": "click:success button to confirm payment",
         "status": "failed",
@@ -2148,10 +2573,10 @@
         "stage": 46,
         "raw_step": "Verify order details are displayed",
         "details": {
-          "duration_ms": 22344.8,
-          "url_after_step": "https://stg.gajab.com/my-bargains",
-          "page_title_after_step": "My Bargains | Gajab",
-          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/46_assert_visible_verify_order_details_are_displayed_failed.png"
+          "navigation_url": "https://stg.gajab.com/",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/01_goto_input_url_passed.png"
         }
       },
       {
@@ -2168,37 +2593,502 @@
         }
       },
       {
-        "step": "assert_visible:Verify the savings displayed",
-        "status": "failed",
-        "error": "Assertion text 'Verify the savings displayed' not found or not visible",
-        "stage": 48,
-        "raw_step": "Verify the savings displayed",
+        "step": "assert_visible:home page is visible",
+        "status": "passed",
+        "stage": 3,
+        "raw_step": "Verify that home page is visible",
         "details": {
-          "duration_ms": 22357.3,
-          "url_after_step": "https://stg.gajab.com/my-bargains",
-          "page_title_after_step": "My Bargains | Gajab",
-          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/48_assert_visible_verify_the_savings_displayed_failed.png"
+          "assertion_attempts": [
+            "body_visible"
+          ],
+          "assert_text": "home page is visible",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/03_assert_visible_home_page_is_visible_passed.png"
+        }
+      },
+      {
+        "step": "click:Log in",
+        "status": "passed",
+        "stage": 4,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/04_click_log_in_passed.png"
+        }
+      },
+      {
+        "step": "fill:random 10 digit mobile number in mobile field",
+        "status": "passed",
+        "stage": 5,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "7168805018",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/05_fill_random_10_digit_mobile_number_in_mobile_field_passed.png"
+        }
+      },
+      {
+        "step": "click:Request OTP",
+        "status": "passed",
+        "stage": 6,
+        "raw_step": "Click 'Request OTP' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/06_click_request_otp_passed.png"
+        }
+      },
+      {
+        "step": "assert_visible:Verify terms and conditions error message is visible",
+        "status": "failed",
+        "error": "Assertion text 'Verify terms and conditions error message is visible' not found or not visible",
+        "stage": 7,
+        "raw_step": "Verify terms and conditions error message is visible",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/07_assert_visible_verify_terms_and_conditions_error_message_is_visible_failed.png"
+        }
+      },
+      {
+        "step": "assert_visible:Verify sign in page is visible",
+        "status": "failed",
+        "error": "Assertion text 'Verify sign in page is visible' not found or not visible",
+        "stage": 8,
+        "raw_step": "Verify sign in page is visible",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/08_assert_visible_verify_sign_in_page_is_visible_failed.png"
+        }
+      },
+      {
+        "step": "goto:input_url",
+        "status": "passed",
+        "stage": 9,
+        "raw_step": "Navigate to url 'https://stg.gajab.com/'",
+        "details": {
+          "navigation_url": "https://stg.gajab.com/",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/09_goto_input_url_passed.png"
+        }
+      },
+      {
+        "step": "click:Log in",
+        "status": "passed",
+        "stage": 10,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/10_click_log_in_passed.png"
+        }
+      },
+      {
+        "step": "fill:random 10 digit mobile number in mobile field",
+        "status": "passed",
+        "stage": 11,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "9476358281",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/11_fill_random_10_digit_mobile_number_in_mobile_field_passed.png"
+        }
+      },
+      {
+        "step": "check:terms and conditions",
+        "status": "passed",
+        "stage": 12,
+        "raw_step": "Click on the check box for terms and conditions",
+        "details": {
+          "locator_resolution": {},
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/12_check_terms_and_conditions_passed.png"
+        }
+      },
+      {
+        "step": "click:Request OTP",
+        "status": "passed",
+        "stage": 13,
+        "raw_step": "Click 'Request OTP' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/13_click_request_otp_passed.png"
+        }
+      },
+      {
+        "step": "fill:OTP '111111' in OTP field",
+        "status": "passed",
+        "stage": 14,
+        "raw_step": "Enter OTP '111111' in OTP field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "111111",
+          "fill_mode": "filled_otp_group:6",
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/14_fill_otp_111111_in_otp_field_passed.png"
+        }
+      },
+      {
+        "step": "click:Submit",
+        "status": "passed",
+        "stage": 15,
+        "raw_step": "Click on 'Submit' or 'Next' button to verify OTP",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/15_click_submit_passed.png"
+        }
+      },
+      {
+        "step": "assert_visible:Verify invalid OTP error message is visible",
+        "status": "failed",
+        "error": "Assertion text 'Verify invalid OTP error message is visible' not found or not visible",
+        "stage": 16,
+        "raw_step": "Verify invalid OTP error message is visible",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/16_assert_visible_verify_invalid_otp_error_message_is_visible_failed.png"
+        }
+      },
+      {
+        "step": "assert_visible:Verify sign in page is visible",
+        "status": "failed",
+        "error": "Assertion text 'Verify sign in page is visible' not found or not visible",
+        "stage": 17,
+        "raw_step": "Verify sign in page is visible",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/17_assert_visible_verify_sign_in_page_is_visible_failed.png"
+        }
+      },
+      {
+        "step": "fill:Prevents failed fulfillment",
+        "status": "passed",
+        "stage": 18,
+        "raw_step": "Business Impact: Prevents failed fulfillment and reduces return/cancellation risk.",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "sample input",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/18_fill_prevents_failed_fulfillment_passed.png"
+        }
+      },
+      {
+        "step": "fill:reduces return/cancellation risk",
+        "status": "passed",
+        "stage": 19,
+        "raw_step": "Business Impact: Prevents failed fulfillment and reduces return/cancellation risk.",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "sample input",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/19_fill_reduces_return_cancellation_risk_passed.png"
+        }
+      },
+      {
+        "step": "goto:input_url",
+        "status": "passed",
+        "stage": 20,
+        "raw_step": "Navigate to url 'https://stg.gajab.com/'",
+        "details": {
+          "navigation_url": "https://stg.gajab.com/",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/20_goto_input_url_passed.png"
+        }
+      },
+      {
+        "step": "click:Log in",
+        "status": "passed",
+        "stage": 21,
+        "raw_step": "Click on 'Log in' or 'Sign up' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/21_click_log_in_passed.png"
+        }
+      },
+      {
+        "step": "fill:random 10 digit mobile number in mobile field",
+        "status": "passed",
+        "stage": 22,
+        "raw_step": "Enter random 10 digit mobile number in mobile field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "9015701644",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/22_fill_random_10_digit_mobile_number_in_mobile_field_passed.png"
+        }
+      },
+      {
+        "step": "check:terms and conditions",
+        "status": "passed",
+        "stage": 23,
+        "raw_step": "Click on the check box for terms and conditions",
+        "details": {
+          "locator_resolution": {},
+          "url_after_step": "https://stg.gajab.com/auth/signin",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/23_check_terms_and_conditions_passed.png"
+        }
+      },
+      {
+        "step": "click:Request OTP",
+        "status": "passed",
+        "stage": 24,
+        "raw_step": "Click 'Request OTP' button",
+        "details": {
+          "locator_resolution": {
+            "source": "dynamic",
+            "strategy": "click",
+            "healed": false,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/24_click_request_otp_passed.png"
+        }
+      },
+      {
+        "step": "fill:OTP '123456' in OTP field",
+        "status": "passed",
+        "stage": 25,
+        "raw_step": "Enter OTP '123456' in OTP field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "123456",
+          "fill_mode": "filled_otp_group:6",
+          "url_after_step": "https://stg.gajab.com/auth/signin?type=otp-verification",
+          "page_title_after_step": "Sign In | Gajab",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/25_fill_otp_123456_in_otp_field_passed.png"
+        }
+      },
+      {
+        "step": "wait:Wait for account creation form page to appear",
+        "status": "passed",
+        "stage": 26,
+        "raw_step": "Wait for account creation form page to appear",
+        "details": {
+          "wait_for": "Wait for account creation form page to appear",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/26_wait_wait_for_account_creation_form_page_to_appear_passed.png"
+        }
+      },
+      {
+        "step": "fill:name 'Test User' in name field",
+        "status": "passed",
+        "stage": 27,
+        "raw_step": "Enter name 'Test User' in name field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "Test User",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/27_fill_name_test_user_in_name_field_passed.png"
+        }
+      },
+      {
+        "step": "click:Male",
+        "status": "failed",
+        "error": "Target not found",
+        "stage": 28,
+        "raw_step": "Click on 'Male' button for gender selection",
+        "details": {
+          "locator_resolution": {
+            "source": "unresolved",
+            "strategy": "click",
+            "healed": false,
+            "matched": false
+          },
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/28_click_male_failed.png"
+        }
+      },
+      {
+        "step": "click:Submit",
+        "status": "failed",
+        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#otp-submit-btn\")\n",
+        "stage": 29,
+        "raw_step": "Click on 'Submit' or 'Next' button to create account",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/29_click_submit_failed.png"
+        }
+      },
+      {
+        "step": "click:location dropdown or location search field",
+        "status": "passed",
+        "stage": 30,
+        "raw_step": "Click on location dropdown or location search field",
+        "details": {
+          "locator_resolution": {
+            "source": "healing",
+            "strategy": "click",
+            "healed": true,
+            "matched": true
+          },
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/30_click_location_dropdown_or_location_search_field_passed.png"
+        }
+      },
+      {
+        "step": "fill:pin code '000000' in location search field",
+        "status": "passed",
+        "stage": 31,
+        "raw_step": "Enter pin code '000000' in location search field",
+        "details": {
+          "locator_resolution": {
+            "source": "contextual",
+            "strategy": "fill",
+            "healed": false,
+            "matched": true
+          },
+          "filled_value": "000000",
+          "fill_mode": "filled_text",
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/31_fill_pin_code_000000_in_location_search_field_passed.png"
+        }
+      },
+      {
+        "step": "assert_visible:Verify location not serviceable message is visible",
+        "status": "failed",
+        "error": "Assertion text 'Verify location not serviceable message is visible' not found or not visible",
+        "stage": 32,
+        "raw_step": "Verify location not serviceable message is visible",
+        "details": {
+          "url_after_step": "https://stg.gajab.com/",
+          "page_title_after_step": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+          "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/32_assert_visible_verify_location_not_serviceable_message_is_visible_failed.png"
         }
       },
       {
         "step": "capture_state",
         "status": "passed",
-        "title": "My Bargains | Gajab",
-        "url": "https://stg.gajab.com/my-bargains"
+        "title": "Gajab: India\u2019s Bargain Bazaar | Bargain Online & Save",
+        "url": "https://stg.gajab.com/"
       }
     ],
     "workflow_summary": {
-      "planned": 48,
-      "executed": 41,
-      "passed": 28,
-      "failed": 12,
-      "skipped": 1
+      "planned": 32,
+      "executed": 31,
+      "passed": 24,
+      "failed": 7,
+      "skipped": 0
+    },
+    "check_summary": {
+      "total_checks": 0,
+      "failed_checks": 0,
+      "passed_checks": 0,
+      "categories": {}
     },
     "locator_summary": {
-      "healed_steps": 9,
-      "direct_matches": 13,
+      "healed_steps": 1,
+      "direct_matches": 16,
       "discovery_lookup_matches": 0,
-      "unresolved": 4
+      "unresolved": 1
     },
     "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke",
     "step_screenshots_dir": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots"
@@ -2207,118 +3097,79 @@
     "bugs": [
       {
         "id": "BUG-1",
-        "step": "assert_visible:Verify location results are displayed",
-        "raw_step": "Verify location results are displayed",
-        "error": "Assertion text 'Verify location results are displayed' not found or not visible",
-        "stage": 18,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/18_assert_visible_verify_location_results_are_displayed_failed.png",
+        "step": "assert_visible:Verify terms and conditions error message is visible",
+        "raw_step": "Verify terms and conditions error message is visible",
+        "error": "Assertion text 'Verify terms and conditions error message is visible' not found or not visible",
+        "stage": 7,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/07_assert_visible_verify_terms_and_conditions_error_message_is_visible_failed.png",
         "severity": "MEDIUM"
       },
       {
         "id": "BUG-2",
-        "step": "assert_visible:gajab deal of the day section is visible",
-        "raw_step": "Verify that Gajab Deal of the Day section is visible",
-        "error": "Assertion text 'gajab deal of the day section is visible' not found or not visible",
-        "stage": 20,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/20_assert_visible_gajab_deal_of_the_day_section_is_visible_failed.png",
+        "step": "assert_visible:Verify sign in page is visible",
+        "raw_step": "Verify sign in page is visible",
+        "error": "Assertion text 'Verify sign in page is visible' not found or not visible",
+        "stage": 8,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/08_assert_visible_verify_sign_in_page_is_visible_failed.png",
         "severity": "MEDIUM"
       },
       {
         "id": "BUG-3",
-        "step": "click:price range filter and set from 427 to 727",
-        "raw_step": "Click on price range filter and set from 427 to 727",
-        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[id*='price']\").first\n    - locator resolved to <button id=\"price-filter-website-accordion-toggle-btn\" class=\"px-[16px] w-full hover:bg-[#FB7E01]/20  transition-colors cursor-pointer   \">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <span id=\"header-backdrop\" class=\"opacity-100 visible bg-[#080926]/20 w-full max-w-[1600px] mx-auto md:px-2 bg-clip-content fixed inset-x-0 z-[998] transition-all duration-200\"></span> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
-        "stage": 26,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/26_click_price_range_filter_and_set_from_427_to_727_failed.png",
-        "severity": "HIGH"
+        "step": "assert_visible:Verify invalid OTP error message is visible",
+        "raw_step": "Verify invalid OTP error message is visible",
+        "error": "Assertion text 'Verify invalid OTP error message is visible' not found or not visible",
+        "stage": 16,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/16_assert_visible_verify_invalid_otp_error_message_is_visible_failed.png",
+        "severity": "MEDIUM"
       },
       {
         "id": "BUG-4",
-        "step": "click:classic 15.7 inch soft tip dartboard game set from search results",
-        "raw_step": "Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results",
-        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='15']\").first\n    - locator resolved to <button id=\"category-component-mobile-filter-open-btn\" class=\"lg:hidden hover:bg-[#EAEBED] border-[2px] border-solid border-[#151C28] rounded-[8px] p-[11px_24px] text-sm leading-[20px] font-medium text-[#151C28] flex gap-[4px] items-center justify-end transition-all duration-200 max-w-[148px] whitespace-nowrap\">Filter</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
-        "stage": 27,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/27_click_classic_15_7_inch_soft_tip_dartboard_game_set_from_search_results_failed.png",
-        "severity": "HIGH"
+        "step": "assert_visible:Verify sign in page is visible",
+        "raw_step": "Verify sign in page is visible",
+        "error": "Assertion text 'Verify sign in page is visible' not found or not visible",
+        "stage": 17,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/17_assert_visible_verify_sign_in_page_is_visible_failed.png",
+        "severity": "MEDIUM"
       },
       {
         "id": "BUG-5",
-        "step": "click:buy now button",
-        "raw_step": "Click on Buy Now button",
-        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"a[id*='buy']\").first\n    - locator resolved to <a href=\"/pages/terms-conditions-for-buyer\" id=\"footer-link-terms-conditions-for-buyer\" class=\"hover:underline text-[12px] leading-[16px] font-medium text-[#2A374F] hover:text-[#151c28]\">Terms & Conditions</a>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
-        "stage": 40,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/40_click_buy_now_button_failed.png",
-        "severity": "HIGH"
+        "step": "click:Male",
+        "raw_step": "Click on 'Male' button for gender selection",
+        "error": "Target not found",
+        "stage": 28,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/28_click_male_failed.png",
+        "severity": "MEDIUM"
       },
       {
         "id": "BUG-6",
-        "step": "click:pay online payment option",
-        "raw_step": "Click on Pay Online payment option",
-        "error": "Target not found",
-        "stage": 41,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/41_click_pay_online_payment_option_failed.png",
-        "severity": "MEDIUM"
+        "step": "click:Submit",
+        "raw_step": "Click on 'Submit' or 'Next' button to create account",
+        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#otp-submit-btn\")\n",
+        "stage": 29,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/29_click_submit_failed.png",
+        "severity": "HIGH"
       },
       {
         "id": "BUG-7",
-        "step": "click:pay button",
-        "raw_step": "Click on Pay button",
-        "error": "Target not found",
-        "stage": 42,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/42_click_pay_button_failed.png",
-        "severity": "MEDIUM"
-      },
-      {
-        "id": "BUG-8",
-        "step": "click:net banking option",
-        "raw_step": "Click on Net Banking option",
-        "error": "Target not found",
-        "stage": 43,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/43_click_net_banking_option_failed.png",
-        "severity": "MEDIUM"
-      },
-      {
-        "id": "BUG-9",
-        "step": "click:a bank from the list",
-        "raw_step": "Click on a bank from the list",
-        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='a']\").first\n    - locator resolved to <button type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-headlessui-state=\"\" id=\"location-desktop-menu-btn\" class=\"flex gap-[4px] items-center justify-end p-[8px] sm:p-[8px_12px] outline-none h-full  transition-all duration-200\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div id=\"search-request-modal-alignment\" class=\"flex min-h-full items-center justify-center p-4\">\u2026</div> from <div id=\"headlessui-portal-root\">\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
-        "stage": 44,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/44_click_a_bank_from_the_list_failed.png",
-        "severity": "HIGH"
-      },
-      {
-        "id": "BUG-10",
-        "step": "click:success button to confirm payment",
-        "raw_step": "Click on Success button to confirm payment",
-        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[class*='to']\").first\n    - locator resolved to <button id=\"search-no-result-request-btn\" class=\"mt-4 hover:shadow-[0px_2px_4px_0px_#FB7E0126] hover:before:bg-[#0000001A] before:absolute before:w-full before:h-full before:left-0 before:top-0 relative overflow-hidden focus:before:bg-[#00000033] before:transition-all before:duration-200 bg-[linear-gradient(90deg,_#F76B07_7.13%,_#FB7E03_100.13%)] p-[12px_16px] w-full max-w-fit h-[36px] sm:h-[50px] rounded-[8px] shadow-[0px_2px_4px_0px_#FB7E0126] text-[11px] sm:text-[16px] leading-[20px] font-medium te\u2026>\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
-        "stage": 45,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/45_click_success_button_to_confirm_payment_failed.png",
-        "severity": "HIGH"
-      },
-      {
-        "id": "BUG-11",
-        "step": "assert_visible:Verify order details are displayed",
-        "raw_step": "Verify order details are displayed",
-        "error": "Assertion text 'Verify order details are displayed' not found or not visible",
-        "stage": 46,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/46_assert_visible_verify_order_details_are_displayed_failed.png",
-        "severity": "MEDIUM"
-      },
-      {
-        "id": "BUG-12",
-        "step": "assert_visible:Verify the savings displayed",
-        "raw_step": "Verify the savings displayed",
-        "error": "Assertion text 'Verify the savings displayed' not found or not visible",
-        "stage": 48,
-        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/48_assert_visible_verify_the_savings_displayed_failed.png",
+        "step": "assert_visible:Verify location not serviceable message is visible",
+        "raw_step": "Verify location not serviceable message is visible",
+        "error": "Assertion text 'Verify location not serviceable message is visible' not found or not visible",
+        "stage": 32,
+        "screenshot": "artifacts/ui_generated/stg_gajab_com/ui_smoke/step_screenshots/32_assert_visible_verify_location_not_serviceable_message_is_visible_failed.png",
         "severity": "MEDIUM"
       }
     ],
-    "total_failures": 12,
+    "total_failures": 7,
     "audit_entry": {
       "agent": "BugReporter",
-      "bugs_reported": 12,
-      "timestamp": "01:27:20"
+      "bugs_reported": 7,
+      "timestamp": "02:47:09"
     }
+  },
+  "dashboard_report": {
+    "path": "artifacts/reports/hackathon_dashboard.html",
+    "generated_at": "2026-09-10T02:47:09",
+    "failed_steps": 7,
+    "defects": 7
   }
 }

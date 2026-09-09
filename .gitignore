@@ -4,3 +4,8 @@ quantum-qa/.env
 .gitignore
 quantum-qa/agents/__pycache__/bug_reporter.cpython-313.pyc
 **__pycache__/
+*.pyc
+__pycache__/
+
+# Generated run artifacts
+artifacts/**

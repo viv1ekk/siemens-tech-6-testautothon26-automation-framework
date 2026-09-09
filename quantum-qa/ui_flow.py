@@ -222,10 +222,12 @@ def _write_negative_testcases_markdown(path: Path, negative_cases: list[dict]) -
 
 def _build_execution_plan(final_state: dict) -> dict:
     workflow = final_state.get("ui_workflow", {})
+    execution = final_state.get("ui_execution", {})
     actions = workflow.get("actions", [])
     return {
         "generated_at": _now_iso(),
         "execution_mode": workflow.get("execution_mode", "auto"),
+        "check_summary": execution.get("check_summary", {}),
         "steps": [
             {
                 "stage": action.get("stage", index + 1),
@@ -376,6 +378,9 @@ def _build_business_impact_markdown(final_state: dict, bugs: list[dict]) -> str:
 def _build_test_summary_markdown(final_state: dict, bugs: list[dict]) -> str:
     ui_execution = final_state.get("ui_execution", {})
     workflow_summary = ui_execution.get("workflow_summary", {})
+    check_summary = ui_execution.get("check_summary", {})
+    categories = check_summary.get("categories", {})
+    total_checks = int(check_summary.get("total_checks", 0) or 0)
     ui_input = final_state.get("ui_input", {})
     lines = [
         "# TS Report - Test Summary",
@@ -392,6 +397,22 @@ def _build_test_summary_markdown(final_state: dict, bugs: list[dict]) -> str:
         "## Bug Snapshot",
         f"- Total Bugs: {len(bugs)}",
     ]
+    if total_checks > 0:
+        lines.extend(
+            [
+                f"- Non-functional Checks Passed: {check_summary.get('passed_checks', 0)}",
+                f"- Non-functional Checks Failed: {check_summary.get('failed_checks', 0)}",
+            ]
+        )
+    if categories:
+        lines.extend(["", "## Non-functional Categories"])
+        for category_name in ["accessibility", "performance", "security", "visual"]:
+            category = categories.get(category_name)
+            if not category:
+                continue
+            lines.append(
+                f"- {category_name.title()}: {category.get('passed', 0)} passed, {category.get('failed', 0)} failed, {category.get('issues', 0)} issues"
+            )
     for bug in bugs[:10]:
         lines.append(f"- {bug['id']} | {bug['severity']} | {bug['title']}")
     if not bugs:
@@ -535,6 +556,7 @@ def main():
     parser.add_argument("--step-pause-ms", type=int, default=1200)
     parser.add_argument("--keep-browser-open-ms", type=int, default=2500)
     parser.add_argument("--headed", action="store_true")
+    parser.add_argument("--nfr-only", action="store_true")
     parser.add_argument("--clean-run-data", action="store_true")
     args = parser.parse_args()
     if args.clean_run_data:
@@ -554,6 +576,7 @@ def main():
         "step_pause_ms": args.step_pause_ms,
         "keep_browser_open_ms": args.keep_browser_open_ms,
         "headed": args.headed,
+        "nfr_only": args.nfr_only,
     }
 
     negative_test_cases = _generate_negative_testcases(problem_statement)
@@ -568,6 +591,7 @@ def main():
         "generated_pom": final_state.get("generated_pom", {}),
         "ui_test_layer": final_state.get("ui_test_layer", {}),
         "ui_execution": final_state.get("ui_execution", {}),
+        "dashboard_report": final_state.get("dashboard_report", {}),
         "release_readiness_score": final_state.get("release_readiness_score"),
         "human_decision": final_state.get("human_decision"),
         "audit_trail_count": len(final_state.get("audit_trail", [])),
@@ -620,6 +644,9 @@ def _terminal_summary(summary: dict) -> str:
     workflow = summary.get("ui_workflow", {})
     execution = summary.get("ui_execution", {})
     workflow_summary = execution.get("workflow_summary", {})
+    check_summary = execution.get("check_summary", {})
+    categories = check_summary.get("categories", {})
+    total_checks = int(check_summary.get("total_checks", 0) or 0)
     lines = [
         "QUANTUM-QA RUN SUMMARY",
         f"Intent: {interpretation.get('intent_type', workflow.get('workflow_type', 'unknown'))}",
@@ -629,6 +656,27 @@ def _terminal_summary(summary: dict) -> str:
         f"Human decision: {summary.get('human_decision', 'pending')}",
         f"Artifacts: {summary.get('ui_discovery', {}).get('artifact_root', '-')}",
     ]
+    if total_checks > 0:
+        lines.insert(
+            4,
+            f"Non-functional checks: {check_summary.get('passed_checks', 0)}/{check_summary.get('total_checks', 0)} passed",
+        )
+    if categories:
+        ordered = []
+        for name in ["accessibility", "performance", "security", "visual"]:
+            data = categories.get(name)
+            if data:
+                ordered.append((name, data))
+        if ordered:
+            lines.append(
+                "Checks: " + ", ".join(
+                    f"{name} {data.get('passed', 0)}/{data.get('passed', 0) + data.get('failed', 0)}"
+                    for name, data in ordered
+                )
+            )
+    dashboard_path = str(summary.get("dashboard_report", {}).get("path", "")).strip()
+    if dashboard_path:
+        lines.append(f"Dashboard: {dashboard_path}")
     return "\n".join(lines)
 
 

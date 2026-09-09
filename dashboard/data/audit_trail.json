@@ -1,18 +1,25 @@
 [
   {
     "agent": "UiPipeline",
-    "timestamp": "01:27:20",
+    "timestamp": "02:47:09",
     "scenario_name": "ui-smoke",
     "target_platform": "web",
-    "discovered_elements": 40,
-    "planned_steps": 48,
-    "executed_steps": 50,
+    "discovered_elements": 99,
+    "planned_steps": 32,
+    "executed_steps": 34,
     "passed": false,
-    "elapsed_s": 527.59
+    "elapsed_s": 521.62
   },
   {
     "agent": "BugReporter",
-    "bugs_reported": 12,
-    "timestamp": "01:27:20"
+    "bugs_reported": 7,
+    "timestamp": "02:47:09"
+  },
+  {
+    "agent": "DashboardAgent",
+    "output": "artifacts/reports/hackathon_dashboard.html",
+    "failed_steps": 7,
+    "defects": 7,
+    "timestamp": "02:47:09"
   }
 ]
