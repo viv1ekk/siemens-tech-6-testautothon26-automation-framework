@@ -1,0 +1,54 @@
+{
+  "form_validation": {
+    "web": {
+      "skill": "form_validation",
+      "platform": "web",
+      "runs": [
+        {
+          "passed": true,
+          "duration_s": 7.17,
+          "method": "inline",
+          "error": ""
+        },
+        {
+          "passed": true,
+          "duration_s": 5.86,
+          "method": "inline",
+          "error": ""
+        }
+      ],
+      "pass_count": 2,
+      "total_runs": 2,
+      "flaky": false,
+      "stable": true,
+      "method": "inline",
+      "last_error": ""
+    }
+  },
+  "accessibility_check": {
+    "web": {
+      "skill": "accessibility_check",
+      "platform": "web",
+      "runs": [
+        {
+          "passed": false,
+          "duration_s": 5.22,
+          "method": "inline",
+          "error": "8 interactive elements missing accessible naming"
+        },
+        {
+          "passed": false,
+          "duration_s": 4.54,
+          "method": "inline",
+          "error": "8 interactive elements missing accessible naming"
+        }
+      ],
+      "pass_count": 0,
+      "total_runs": 2,
+      "flaky": false,
+      "stable": false,
+      "method": "inline",
+      "last_error": "8 interactive elements missing accessible naming"
+    }
+  }
+}

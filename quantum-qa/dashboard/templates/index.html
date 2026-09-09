@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QUANTUM-QA Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #0b1220;
+      --line: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --good: #4ade80;
+      --warn: #fbbf24;
+      --bad: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 24px; }
+    .hero {
+      background: linear-gradient(135deg, #111827 0%, #0b1220 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .hero-top { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+    h1 { margin: 6px 0 10px; font-size: 32px; }
+    .muted { color: var(--muted); }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #dbeafe;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .score {
+      min-width: 180px;
+      text-align: right;
+      padding: 14px 18px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+    }
+    .score strong { display: block; font-size: 32px; margin-top: 4px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .metric-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+    .metric-value { font-size: 28px; font-weight: 700; margin-top: 6px; }
+    .section-title { margin: 0 0 8px; font-size: 18px; }
+    .section-subtitle { margin: 0 0 16px; color: var(--muted); }
+    .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .cap-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .cap-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .cap-title { font-size: 16px; font-weight: 700; }
+    .cap-count {
+      font-size: 12px;
+      color: #e0f2fe;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 999px;
+      padding: 4px 10px;
+      height: fit-content;
+    }
+    .cap-desc { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+    .item-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .item-chip {
+      background: #0b1220;
+      border: 1px solid #243244;
+      color: #cbd5e1;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status-good { color: var(--good); }
+    .status-warn { color: var(--warn); }
+    .status-bad { color: var(--bad); }
+    .two-col { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+    .list { display: grid; gap: 12px; }
+    .list-item {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 14px;
+    }
+    .agent-name { font-weight: 700; }
+    .agent-message { margin-top: 6px; color: var(--muted); line-height: 1.45; }
+    .agent-time { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .recommend-list { margin: 0; padding-left: 18px; display: grid; gap: 10px; }
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+      .score { text-align: left; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="muted">QUANTUM-QA framework dashboard</div>
+          <h1>{{ summary.scenario_title }}</h1>
+          <div class="muted">
+            {{ summary.url }} &nbsp;•&nbsp; {{ summary.scenario_name }} &nbsp;•&nbsp; {{ summary.target_platform|title }}
+          </div>
+          <div class="muted" style="margin-top: 8px;">{{ summary.problem_summary }}</div>
+          <div class="pill-row">
+            <span class="pill">Latest run</span>
+            <span class="pill">Business workflow view</span>
+            <span class="pill">Intent: {{ summary.intent_type|replace('_', ' ')|title }}</span>
+            <span class="pill">Mode: {{ summary.execution_mode|title }}</span>
+            <span class="pill">Profile: {{ summary.run_profile|title }}</span>
+            <span class="pill">{{ summary.discovered_elements_count }} interactive items found</span>
+            <span class="pill">{{ summary.workflow.executed }}/{{ summary.workflow.planned }} workflow steps executed</span>
+          </div>
+        </div>
+        <div class="score">
+          <div class="muted">Release readiness</div>
+          <strong class="{% if summary.release_readiness_score >= 90 %}status-good{% elif summary.release_readiness_score >= 80 %}status-warn{% else %}status-bad{% endif %}">
+            {{ summary.release_readiness_score }}/100
+          </strong>
+          <div class="muted">Human decision: <strong>{{ summary.human_decision }}</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="metric-label">Execution health</div>
+        <div class="metric-value {% if summary.execution_passed %}status-good{% else %}status-bad{% endif %}">
+          {% if summary.execution_passed %}Passed{% else %}Needs attention{% endif %}
+        </div>
+        <div class="muted">Multi-stage workflow run completed against the page.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Workflow stages</div>
+        <div class="metric-value">{{ summary.workflow.stage_count }}</div>
+        <div class="muted">Distinct stages parsed from the requirement.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Workflow failures</div>
+        <div class="metric-value {% if summary.workflow.failed > 0 %}status-bad{% else %}status-good{% endif %}">{{ summary.workflow.failed }}</div>
+        <div class="muted">Required workflow actions that failed.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Workflow skips</div>
+        <div class="metric-value {% if summary.workflow.skipped > 0 %}status-warn{% else %}status-good{% endif %}">
+          {{ summary.workflow.skipped }}
+        </div>
+        <div class="muted">Optional actions skipped due to locator mismatch.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Locator healing</div>
+        <div class="metric-value {% if summary.locator_summary.healed_steps > 0 %}status-warn{% else %}status-good{% endif %}">
+          {{ summary.locator_summary.healed_steps }}
+        </div>
+        <div class="muted">Workflow steps recovered using self-healing locators.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Execution environment</div>
+        <div class="metric-value {% if summary.environment_issue_count > 0 %}status-warn{% else %}status-good{% endif %}">
+          {{ summary.environment_issue_count }}
+        </div>
+        <div class="muted">Environment issues detected across web/mobile execution.</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">What this product appears to offer</h2>
+    <p class="section-subtitle">The framework turns the page into user-facing capability groups so you can see what the product is capable of, without reading raw JSON or code.</p>
+    <div class="cap-grid">
+      {% for group in capabilities %}
+      <div class="cap-card">
+        <div class="cap-head">
+          <div class="cap-title">{{ group.title }}</div>
+          <div class="cap-count">{{ group.count }} item{{ 's' if group.count != 1 else '' }}</div>
+        </div>
+        <div class="cap-desc">{{ group.description }}</div>
+        <div class="muted">Discovery confidence: {{ (group.confidence * 100) | round(0) }}%</div>
+        <div class="item-row">
+          {% for item in group.samples %}
+          <span class="item-chip">{{ item.label }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+      <h2 class="section-title">Workflow progression</h2>
+      <p class="section-subtitle">Sample stages extracted from your requirement and executed by the generic workflow engine.</p>
+      <ol class="recommend-list">
+        {% for step in summary.workflow.sample_steps %}
+        <li>{{ step }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="grid" style="margin-top: 20px;">
+      <div class="card">
+        <div class="metric-label">Run history</div>
+        <div class="metric-value">{{ summary.history.run_count }}</div>
+        <div class="muted">Stored runs available for comparison in the dashboard history.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Score delta</div>
+        <div class="metric-value {% if summary.history.score_delta > 0 %}status-good{% elif summary.history.score_delta < 0 %}status-bad{% else %}status-warn{% endif %}">
+          {{ summary.history.score_delta }}
+        </div>
+        <div class="muted">Change in readiness score versus the previous run.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Recent scores</div>
+        <div class="metric-value" style="font-size: 20px;">{{ summary.history.recent_scores|join(', ') if summary.history.recent_scores else 'None' }}</div>
+        <div class="muted">Last five readiness scores for quick trend reading.</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top: 20px;">
+      <div class="card">
+        <h2 class="section-title">Agent outcomes</h2>
+        <p class="section-subtitle">Each agent contributes a plain-language result that helps the user understand what the framework did.</p>
+        <div class="list">
+          {% for agent in agent_cards %}
+          <div class="list-item">
+            <div class="agent-name">{{ agent.agent }}</div>
+            <div class="agent-message">{{ agent.message }}</div>
+            <div class="agent-time">{{ agent.timestamp }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Recommended next checks</h2>
+        <p class="section-subtitle">The dashboard highlights the most useful follow-up work for this product page.</p>
+        <ol class="recommend-list">
+          {% for recommendation in recommendations %}
+          <li>{{ recommendation }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+      <h2 class="section-title">User-facing summary</h2>
+      <p class="section-subtitle">
+        The product under test is presented here as a discoverable experience: the main page paths, inputs, action points,
+        test health, and release confidence are summarized in one place.
+      </p>
+      <div class="grid" style="margin-bottom: 0;">
+        <div class="card" style="margin: 0;">
+          <div class="metric-label">App status</div>
+          <div class="metric-value">{% if summary.execution_passed %}Ready for exploration{% else %}Needs review{% endif %}</div>
+        </div>
+        <div class="card" style="margin: 0;">
+          <div class="metric-label">Best focus area</div>
+          <div class="metric-value">{{ summary.capability_groups[0].title if summary.capability_groups else 'None' }}</div>
+        </div>
+        <div class="card" style="margin: 0;">
+          <div class="metric-label">Artifact location</div>
+          <div class="metric-value" style="font-size: 18px;">{{ summary.artifact_root }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      QUANTUM-QA dashboard — designed to explain what the product can do, not how the framework is coded.
+    </div>
+  </div>
+</body>
+</html>

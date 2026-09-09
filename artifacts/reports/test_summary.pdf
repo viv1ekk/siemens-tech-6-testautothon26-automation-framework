@@ -1,0 +1,66 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [3 0 R] >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 437 >>
+stream
+BT
+/F1 10 Tf
+50 780 Td
+14 TL
+(# TS Report - Test Summary) Tj
+T*
+() Tj
+T*
+(- Generated at: 2026-09-09T14:51:48) Tj
+T*
+(- URL: https://stg.gajab.com/) Tj
+T*
+(- Scenario: ui-smoke) Tj
+T*
+(- Intent: auth) Tj
+T*
+(- Steps Passed: 2) Tj
+T*
+(- Steps Planned: 48) Tj
+T*
+(- Release Readiness: 100/100) Tj
+T*
+(- Human Decision: None) Tj
+T*
+() Tj
+T*
+(## Bug Snapshot) Tj
+T*
+(- Total Bugs: 0) Tj
+T*
+(- No bugs detected in this run.) Tj
+T*
+() Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000729 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+799
+%%EOF

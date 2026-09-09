@@ -1,0 +1,38 @@
+name: "Payment Checkout"
+description: "End-to-end payment flow — Web, Mobile"
+requirement_ids: [REQ-001, REQ-002, REQ-003]
+
+skills:
+  - name: form_validation
+    platforms: [web, mobile]
+    description: "Validate all payment form fields before submission"
+    steps:
+      - navigate: "/checkout"
+      - assert: "card_number_field_visible"
+      - assert: "expiry_field_visible"
+      - assert: "submit_button_disabled_when_empty"
+
+  - name: payment_submission
+    platforms: [web, mobile]
+    description: "Submit payment and verify success"
+    steps:
+      - fill: card_number → "4111111111111111"
+      - fill: expiry     → "12/25"
+      - fill: cvv        → "123"
+      - click: submit_button
+      - assert: "success_message_visible"
+    network_conditions: [wifi, 4g, 3g]
+
+  - name: error_handling
+    platforms: [web, mobile]
+    description: "Verify graceful handling of network failures"
+    steps:
+      - simulate: network_timeout
+      - assert: "error_message_shown"
+      - assert: "retry_button_visible"
+      - click: retry_button
+      - assert: "payment_retried_successfully"
+
+requirements_tracing:
+  REQ-001: "User can enter and submit card payment"
+  REQ-002: "System handles network failures gracefully on mobile"

@@ -1,0 +1,79 @@
+﻿Test Case: Gajab End-to-End Customer Journey Automation
+
+Website: https://stg.gajab.com/
+Test Credentials:
+- Mobile Number: random 10 digit number
+- OTP: '123456'
+- Name: Test User
+- Gender: Male
+- Pin Code: '560001'
+- Email: qa.automation@gajab.com
+- Product Brand: SERA'S BASKET
+- Price Range: 427 to 727
+- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set
+- Payment Method: Net Banking
+
+Steps:
+1. Launch browser
+2. Navigate to url 'https://stg.gajab.com/'
+3. Verify that home page is visible
+4. Click on 'Log in' or 'Sign up' button
+5. Verify url contains 'signin' after page loads
+6. Wait for the page to load completely and ensure all elements are visible
+7. Enter random 10 digit mobile number in mobile field
+8. Click on the check box for terms and conditions
+9. Click 'Request OTP' button
+10. Enter OTP '123456' in OTP field
+11. Wait for account creation form page to appear
+12. Enter name 'Test User' in name field
+13. Click on 'Male' button for gender selection
+14. Click on 'Submit' or 'Next' button to create account
+15. Verify account created successfully message appears
+16. Click on location dropdown or location search field
+17. Wait for location search field to become active
+18. Enter pin code '560001' in location search field
+19. Verify location results are displayed
+20. Select the location from search results or dropdown
+21. Verify location is applied successfully
+22. Verify that Gajab Deal of the Day section is visible
+23. Capture the product name from Deal of the Day
+24. Capture the product image from Deal of the Day
+25. Capture the asking price from Deal of the Day
+26. Click share or email button for Deal of the Day product
+27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'
+28. Verify email sent confirmation message
+29. Navigate to Trending Products section
+30. Identify the most-bargained product under Trending Products
+31. Capture screenshot of the most-bargained product
+32. Scroll to Just Bargained section
+33. Capture the name and city of the latest live order
+34. Click on View All link in Just Bargained Product section
+35. Identify the cheapest product among the most-bargained products
+36. Click on Toys and Games category tab
+37. Click on SERA'S BASKET brand from the left filter
+38. Click on price range filter and set from 427 to 727
+39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results
+40. Click on the selected product
+41. Click on Bargain button to start bargaining
+42. Enter bargain offer and submit
+43. Wait for seller response to bargain offer
+44. Enter another bargain offer and submit
+45. Wait for seller response to bargain offer
+46. Enter final bargain offer and submit
+47. Wait for seller response to bargain offer
+48. Click on Accept button to accept the final bargain offer
+49. Click on Buy Now button
+50. Click on Pay Online payment option
+51. Click on Pay button
+52. Click on Net Banking option
+53. Click on a bank from the list
+54. Complete payment on bank portal
+55. Click on Success button to confirm payment
+56. Verify order placed successfully message
+57. Verify order details are displayed
+58. Navigate to My Bargains section
+59. Verify the savings displayed
+60. Verify bargained product is listed in My Bargains
+61. Verify deal details match the bargained offer
+62. Logout from the application
+63. Verify logout successful message

@@ -1,0 +1,8 @@
+{
+  "status": "generated",
+  "test_file": "artifacts/ui_generated/stg_gajab_com/ui_smoke/tests/test_ui_smoke.spec.ts",
+  "framework": "playwright",
+  "scenario_name": "ui-smoke",
+  "page_object": "UiSmokePage",
+  "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke"
+}

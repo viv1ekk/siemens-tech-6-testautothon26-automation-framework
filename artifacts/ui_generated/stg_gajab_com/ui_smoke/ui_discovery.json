@@ -1,0 +1,1151 @@
+{
+  "status": "generated",
+  "url": "https://stg.gajab.com/",
+  "problem_statement": "\ufeffTest Case: Gajab End-to-End Customer Journey Automation\n\nWebsite: https://stg.gajab.com/\nTest Credentials:\n- Mobile Number: random 10 digit number\n- OTP: '123456'\n- Name: Test User\n- Gender: Male\n- Pin Code: '560001'\n- Email: qa.automation@gajab.com\n- Product Brand: SERA'S BASKET\n- Price Range: 427 to 727\n- Product: Classic 15.7 Inch Soft Tip Dartboard Game Set\n- Payment Method: Net Banking\n\nSteps:\n1. Launch browser\n2. Navigate to url 'https://stg.gajab.com/'\n3. Verify that home page is visible\n4. Click on 'Log in' or 'Sign up' button\n5. Verify url contains 'signin' after page loads\n6. Wait for the page to load completely and ensure all elements are visible\n7. Enter random 10 digit mobile number in mobile field\n8. Click on the check box for terms and conditions\n9. Click 'Request OTP' button\n10. Enter OTP '123456' in OTP field\n11. Wait for account creation form page to appear\n12. Enter name 'Test User' in name field\n13. Click on 'Male' button for gender selection\n14. Click on 'Submit' or 'Next' button to create account\n15. Verify account created successfully message appears\n16. Click on location dropdown or location search field\n17. Wait for location search field to become active\n18. Enter pin code '560001' in location search field\n19. Verify location results are displayed\n20. Select the location from search results or dropdown\n21. Verify location is applied successfully\n22. Verify that Gajab Deal of the Day section is visible\n23. Capture the product name from Deal of the Day\n24. Capture the product image from Deal of the Day\n25. Capture the asking price from Deal of the Day\n26. Click share or email button for Deal of the Day product\n27. Send product image, product name, and asking price to email 'qa.automation@gajab.com'\n28. Verify email sent confirmation message\n29. Navigate to Trending Products section\n30. Identify the most-bargained product under Trending Products\n31. Capture screenshot of the most-bargained product\n32. Scroll to Just Bargained section\n33. Capture the name and city of the latest live order\n34. Click on View All link in Just Bargained Product section\n35. Identify the cheapest product among the most-bargained products\n36. Click on Toys and Games category tab\n37. Click on SERA'S BASKET brand from the left filter\n38. Click on price range filter and set from 427 to 727\n39. Click on Classic 15.7 Inch Soft Tip Dartboard Game Set from search results\n40. Click on the selected product\n41. Click on Bargain button to start bargaining\n42. Enter bargain offer and submit\n43. Wait for seller response to bargain offer\n44. Enter another bargain offer and submit\n45. Wait for seller response to bargain offer\n46. Enter final bargain offer and submit\n47. Wait for seller response to bargain offer\n48. Click on Accept button to accept the final bargain offer\n49. Click on Buy Now button\n50. Click on Pay Online payment option\n51. Click on Pay button\n52. Click on Net Banking option\n53. Click on a bank from the list\n54. Complete payment on bank portal\n55. Click on Success button to confirm payment\n56. Verify order placed successfully message\n57. Verify order details are displayed\n58. Navigate to My Bargains section\n59. Verify the savings displayed\n60. Verify bargained product is listed in My Bargains\n61. Verify deal details match the bargained offer\n62. Logout from the application\n63. Verify logout successful message",
+  "target_platform": "web",
+  "scenario_name": "ui-smoke",
+  "page_title": "Ui Smoke",
+  "elements": [
+    {
+      "name": "location_desktop_menu_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#location-desktop-menu-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_download_menu_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-download-menu-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "language_switcher_desktop_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#language-switcher-desktop-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_logo_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-logo-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_search_input",
+      "kind": "input",
+      "tag": "input",
+      "type": "text",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-search-input"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_become_seller_btn",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-become-seller-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_my_bargains_btn",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-my-bargains-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "header_login_btn",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#header-login-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_scroll_right_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-scroll-right-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_1",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-1"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_86",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-86"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_17",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-17"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_44",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-44"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_22",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-22"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_14",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-14"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_9",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-9"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_49",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-49"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "category_list_desktop_link_41",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#category-list-desktop-link-41"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_hero_prev_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-hero-prev-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_hero_next_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-hero-next-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp1_view_more",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp1-view-more"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp1_product_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp1-product-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp1_product_title",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp1-product-title"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp1_bargain_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp1-bargain-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_view_more",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-view-more"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202617498994",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202617498994"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202617498994",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202617498994"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_pw_2381522385",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-PW-2381522385"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_pw_2381522385",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-PW-2381522385"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_bott316501764",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-BOTT316501764"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_bott316501764",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-BOTT316501764"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202665302021",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202665302021"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202665302021",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202665302021"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_yche205952319",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-YCHE205952319"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_yche205952319",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-YCHE205952319"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_bath937082743",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-BATH937082743"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_bath937082743",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-BATH937082743"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_88co099751365",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-88CO099751365"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_88co099751365",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-88CO099751365"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_whit160220422",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-WHIT160220422"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_whit160220422",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-WHIT160220422"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_car_165118929",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-CAR_165118929"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_car_165118929",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-CAR_165118929"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_003_332698443",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-003_332698443"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_003_332698443",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-003_332698443"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_tabl668455644",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-TABL668455644"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_tabl668455644",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-TABL668455644"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_8vdr152898541",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-8VDR152898541"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_8vdr152898541",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-8VDR152898541"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_12le891386560",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-12LE891386560"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_12le891386560",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-12LE891386560"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202693821050",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202693821050"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202693821050",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202693821050"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202605101898",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202605101898"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202605101898",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202605101898"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_bath942710901",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-BATH942710901"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_bath942710901",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-BATH942710901"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202622690268",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202622690268"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202622690268",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202622690268"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_202667457799",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-202667457799"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_202667457799",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-202667457799"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_7p1n773529168",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-7P1N773529168"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_7p1n773529168",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-7P1N773529168"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_link_003_341854283",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-link-003_341854283"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp2_item_bargain_btn_003_341854283",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp2-item-bargain-btn-003_341854283"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp3_product_img_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp3-product-img-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp3_title_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp3-title-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_wp3_bargain_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-wp3-bargain-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_new_arrival_prev_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-new-arrival-prev-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_new_arrival_next_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-new-arrival-next-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_limited_quantity_prev_btn_wp8",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-limited-quantity-prev-btn-wp8"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_limited_quantity_next_btn_wp8",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-limited-quantity-next-btn-wp8"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_limited_quantity_prev_btn_wp13",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-limited-quantity-prev-btn-wp13"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "home_limited_quantity_next_btn_wp13",
+      "kind": "action",
+      "tag": "button",
+      "type": "submit",
+      "selector": {
+        "strategy": "css",
+        "value": "#home-limited-quantity-next-btn-wp13"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_terms_conditions_for_buyer",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-terms-conditions-for-buyer"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_terms_of_use",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-terms-of-use"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_privacy_policy",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-privacy-policy"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_protection_policy",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-protection-policy"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_cookie_policy",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-cookie-policy"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_cancellation_return_and_refund_polic",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-cancellation-return-and-refund-policy"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_terms_conditions_for_seller",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-terms-conditions-for-seller"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_privacy_policy_for_seller",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-privacy-policy-for-seller"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_seller_registration_and_kyc_policy",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-seller-registration-and-kyc-policy"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_seller_agreement",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-seller-agreement"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_link_0",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-link-0"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_app_store_btn",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-app-store-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_play_store_btn",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-play-store-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_phone_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-phone-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_email_link",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-email-link"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_social_instagram",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-social-instagram"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_social_facebook",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-social-facebook"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_social_twitter",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-social-twitter"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_social_youtube",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-social-youtube"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "footer_social_linkedin",
+      "kind": "action",
+      "tag": "a",
+      "type": "",
+      "selector": {
+        "strategy": "css",
+        "value": "#footer-social-linkedin"
+      },
+      "source": "css",
+      "confidence": 0.99
+    },
+    {
+      "name": "back_to_top_btn",
+      "kind": "action",
+      "tag": "button",
+      "type": "button",
+      "selector": {
+        "strategy": "css",
+        "value": "#back-to-top-btn"
+      },
+      "source": "css",
+      "confidence": 0.99
+    }
+  ],
+  "artifact_root": "artifacts/ui_generated/stg_gajab_com/ui_smoke"
+}
