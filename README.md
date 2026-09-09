@@ -1,306 +1,172 @@
 ﻿# QUANTUM-QA: Gajab E-Commerce Automation
 
-**TestAthon Bangalore 2026** — Autonomous Testing with Agentic AI
+Autonomous UI workflow execution using Playwright, with business-oriented reporting.
 
-> Automated end-to-end Gajab e-commerce workflow with Playwright + intelligent bug reporting
+## What This Framework Does
 
----
+- Discovers interactive UI elements from a URL.
+- Converts plain-English problem statements into executable actions.
+- Executes workflows in a real browser (headed or headless).
+- Captures step-wise evidence and execution JSON.
+- Generates business-ready reports (JSON, CSV, XLSX, PDF, Markdown).
+- Supports both functional and non-functional validation (NFR).
 
-## What This Does
+## Repository Layout
 
-QUANTUM-QA is a **Playwright-based UI automation framework** for TestAthon that:
-
-✅ **Discovers** UI elements from any website using Playwright  
-✅ **Parses** natural language problem statements into executable workflow steps  
-✅ **Executes** multi-page workflows (navigate → click → fill → assert)  
-✅ **Captures** failures as bug reports (JSON, CSV, XLSX, PDF)  
-✅ **Generates** screenshots for every step  
-✅ **Fast**: All timeouts capped at 5-8 seconds (demo-ready performance)
-
----
-
-## Quick Start
-
-### 1. Clone & Install
-
-`ash
-git clone <repo>
-cd vivekkumar-sagcp-bookish-fortnight
-
-pip install -r requirements.txt
-playwright install chromium
-`
-
-### 2. Run the Gajab Workflow
-
-`ash
-python quantum-qa/ui_flow.py \
-  --ui-url "https://stg.gajab.com/" \
-  --ui-problem-statement-file "quantum-qa/Problemstatement/workflow_gajab.txt" \
-  --clean-run-data \
-  --headed
-`
-
-**Options:**
-- --headed — Show browser during execution
-- --clean-run-data — Clear previous run artifacts
-- --step-pause-ms 1000 — Slow down for demo visibility
-
-### 3. View Bug Reports
-
-After execution, check:
-
-`
-artifacts/bugs/
-├── bug_report.json     # Detailed bug data
-├── bug_report.csv      # Spreadsheet format
-├── bug_report.xlsx     # Excel format
-└── bug_report.pdf      # PDF report
-`
-
----
-
-## The Gajab Test Case (60 Steps)
-
-**Workflow:** quantum-qa/Problemstatement/workflow_gajab.txt
-
-**Scenario:** Complete e-commerce customer journey:
-
-1. **Login** (Steps 1-15)
-   - Navigate → Sign in → Enter mobile → Request OTP
-   - Verify OTP → Create profile (name, gender)
-   
-2. **Location Setup** (Steps 16-21)
-   - Select location via pin code
-   - Verify location applied
-
-3. **Deal Discovery** (Steps 22-25)
-   - View Deal of the Day
-   - Email product details
-
-4. **Market Research** (Steps 26-35)
-   - Browse Trending Products
-   - Filter by category (Toys & Games)
-   - Apply brand filter (SERA'S BASKET)
-   - Apply price range (427-727)
-
-5. **Bargaining** (Steps 36-48)
-   - Select product
-   - Initiate bargain
-   - Submit 3 counter-offers
-   - Accept final offer
-
-6. **Payment** (Steps 49-52)
-   - Click Buy Now
-   - Select Pay Online
-   - Choose Net Banking
-   - Confirm payment
-
-7. **Verification** (Steps 53-58)
-   - Verify order placed
-   - Check My Bargains
-   - Validate savings
-
-8. **Logout** (Steps 59-60)
-   - Sign out & confirm
-
----
-
-## Architecture
-
-`
-Problem Statement (workflow_gajab.txt)
-         ↓
-ui_flow.py (Entry Point)
-         ↓
-UiPipelineAgent (Playwright)
-  ├─ Interpret workflow steps
-  ├─ Discover page elements
-  ├─ Build action sequence
-  ├─ Execute in Playwright browser
-  └─ Capture screenshots & results
-         ↓
-BugReporterAgent (Report Generation)
-  ├─ Extract failures
-  ├─ Classify as bugs
-  └─ Generate reports (JSON/CSV/XLSX/PDF)
-         ↓
-artifacts/bugs/ (Output)
-`
-
----
-
-## Key Features
-
-### ⚡ Fast Execution
-- All timeouts: **5-8 seconds max**
-- Element not found: **Fail in 5 seconds** (not 30s)
-- Perfect for demo scenarios
-
-### 🔍 Intelligent Element Discovery
-- Role-based lookup (get_by_role)
-- Text-based lookup (get_by_text)
-- Attribute matching (CSS selectors)
-- Context-aware form field detection
-
-### 📸 Evidence Capture
-- Screenshot on every step
-- Step status tracking (pass/fail/skip)
-- URL & page title logging
-- Failure details with error messages
-
-### 📊 Bug Reporting
-- **JSON**: Full structured bug data
-- **CSV**: Spreadsheet-compatible format
-- **XLSX**: Excel workbook with formatting
-- **PDF**: Human-readable report
-
-### 🎯 Supported Actions
-- goto → Navigate to URL
-- click → Click elements
-- ill → Enter text
-- check → Toggle checkboxes
-- select → Choose dropdown options
-- wait → Wait for page/element
-- efresh → Reload page
-- ssert_visible → Text assertions
-- ssert_url_contains → URL assertions
-
----
-
-## Project Structure
-
-`
+```text
 quantum-qa/
-├── agents/
-│   ├── ui_pipeline.py       # Playwright orchestration (2084 lines)
-│   ├── bug_reporter.py      # Bug extraction & reporting
-│   └── graph.py             # Pipeline execution
-├── Problemstatement/
-│   └── workflow_gajab.txt   # 60-step Gajab workflow
-├── platforms/               # Web execution helpers
-├── ui_flow.py               # Main entrypoint
-└── requirements.txt         # Dependencies
+   ui_flow.py                        # CLI entrypoint
+   agents/
+      graph.py                        # Pipeline orchestration
+      ui_pipeline.py                  # Discovery + workflow build + execution
+      bug_reporter.py                 # Failure-to-bug classification
+   Problemstatement/
+      workflow_gajab.txt              # Main end-to-end functional scenario
+      workflow_gajab_negative_business.txt  # Business-impacting negative scenarios
+   specs/
+      auth.spec.yaml
+      payment.spec.yaml
 
-artifacts/
-└── bugs/                    # Bug reports (generated)
-    ├── bug_report.json
-    ├── bug_report.csv
-    ├── bug_report.xlsx
-    └── bug_report.pdf
-`
+artifacts/                          # Generated run outputs (gitignored)
+dashboard/data/                     # Latest run snapshots for dashboard
+```
 
----
+## Setup
 
-## Tech Stack
+From repo root:
 
-| Component | Technology |
-|-----------|-----------|
-| **Orchestration** | Python 3.10+ |
-| **Browser Automation** | Playwright |
-| **UI Discovery** | Playwright locators |
-| **Workflow Language** | Plain English (txt) |
-| **Reporting** | JSON, CSV, XLSX, PDF |
+```bash
+pip install -r quantum-qa/requirements.txt
+playwright install chromium
+```
 
----
+On Windows, you can use `py` instead of `python`.
 
-## Performance Tuning
+## Run Functional Workflow
 
-### Timeout Strategy
-- **Initial page load**: 8 seconds
-- **Element lookup**: 5 seconds
-- **Assertions**: 5s → 3s → 2s (retry levels)
-- **Step pause**: 500ms (demo visibility)
+```bash
+py quantum-qa/ui_flow.py \
+   --ui-url "https://stg.gajab.com/" \
+   --ui-problem-statement-file "quantum-qa/Problemstatement/workflow_gajab.txt" \
+   --headed
+```
 
-### Why Fast?
-- Demo scenarios need quick feedback
-- Page should stabilize in 8s or fail
-- No waiting for slow network
-- Timeouts tuned for stg.gajab.com
+Useful runtime flags:
 
----
+- `--clean-run-data`: clears prior generated run data.
+- `--step-pause-ms 1200`: controls pace between steps.
+- `--keep-browser-open-ms 2500`: keeps browser visible briefly after completion.
+- `--output summary|json`: terminal output format.
 
-## Example Execution Output
+## Run Non-Functional (NFR) Checks
 
-`
-[PLAYWRIGHT TEST COMPLETE]
-Steps: 60 total | 45 passed | 10 failed | 5 skipped
-Bugs Found: 10
-Bug Report: artifacts/bugs/bug_report.json
-`
+NFR checks currently supported by the workflow engine:
 
-### Bug Report Sample (JSON)
-`json
-{
-  "bugs": [
-    {
-      "id": "BUG-1",
-      "step": "click:Male",
-      "raw_step": "Click on 'Male' button for gender selection",
-      "error": "Target not found",
-      "stage": 11,
-      "severity": "HIGH"
-    }
-  ]
-}
-`
+- Accessibility scan
+- Performance budget
+- Security smoke checks
+- Visual comparison (baseline hash)
 
----
+Run only NFR checks:
 
-## Running in Demo Mode
+```bash
+py quantum-qa/ui_flow.py \
+   --ui-url "https://stg.gajab.com/" \
+   --ui-problem-statement-file "quantum-qa/Problemstatement/workflow_gajab.txt" \
+   --nfr-only \
+   --headed
+```
 
-**Best for presentations:**
+Run profile tuning:
 
-`ash
-python quantum-qa/ui_flow.py \
-  --ui-url "https://stg.gajab.com/" \
-  --ui-problem-statement-file "quantum-qa/Problemstatement/workflow_gajab.txt" \
-  --headed \
-  --step-pause-ms 1500 \
-  --clean-run-data
-`
+- `--run-profile demo`: most tolerant, optimized for live demo stability.
+- `--run-profile balanced`: moderate strictness.
+- `--run-profile thorough`: strictest thresholds.
 
-Browser will display each step with 1.5s pause — perfect for live demos!
+Note: NFR summary sections are shown only when NFR checks actually execute.
 
----
+## Run Business-Impacting Negative Tests
+
+Negative scenario pack file:
+
+- `quantum-qa/Problemstatement/workflow_gajab_negative_business.txt`
+
+Run command:
+
+```bash
+py quantum-qa/ui_flow.py \
+   --ui-url "https://stg.gajab.com/" \
+   --ui-problem-statement-file "quantum-qa/Problemstatement/workflow_gajab_negative_business.txt" \
+   --headed
+```
+
+Included negative scenarios:
+
+1. Request OTP without accepting Terms and Conditions (compliance guard).
+2. Invalid OTP rejection (account takeover/fraud prevention).
+3. Non-serviceable pin code rejection (fulfillment risk control).
+
+Authoring guideline for problem statement files:
+
+- Keep executable steps as numbered actions.
+- Avoid free-text lines between steps unless they are prefixed as comments or kept outside the scenario body.
+
+## Post-Run Hackathon Dashboard
+
+After each run, a static executive dashboard is generated automatically by `DashboardAgent`.
+
+Generated file:
+
+- `artifacts/reports/hackathon_dashboard.html`
+
+The dashboard includes:
+
+- Test coverage and pass rate
+- Passed/failed counts
+- Failed steps with screenshot evidence
+- Human gate decision and release readiness
+- Defects observed by automation, including severity and screenshots
+- NFR outcome summary (only when NFR checks run)
+
+Open it directly in a browser after the run.
+
+## Outputs and Reports
+
+Primary generated outputs:
+
+- `artifacts/ui_generated/.../ui_execution.json`
+- `artifacts/execution/core_action_plan.json`
+- `artifacts/execution/execution_result.json`
+- `artifacts/reports/test_summary.md`
+- `artifacts/reports/business_impact_analysis.md`
+- `artifacts/bugs/bug_report.json`
+- `artifacts/bugs/bug_report.csv`
+- `artifacts/bugs/bug_report.xlsx`
+- `artifacts/bugs/bug_report.pdf`
+
+Dashboard snapshots:
+
+- `dashboard/data/latest_run.json`
+- `dashboard/data/audit_trail.json`
+
+## Architecture Reference
+
+See `ARCHITECTURE.md` for detailed architecture, data flow, and extension points.
 
 ## Troubleshooting
 
-### Playwright not installed
-`ash
-playwright install chromium
-`
+- Browser does not appear:
+   - add `--headed`.
+- Slow environment causes flaky steps:
+   - increase `--step-pause-ms` and/or use `--run-profile demo` for NFR runs.
+- Need a clean result set:
+   - run with `--clean-run-data`.
 
-### Timeouts on slow pages
-Edit quantum-qa/agents/ui_pipeline.py and increase timeout values (currently 5-8s)
+## Notes on Git
 
-### Element not found in bug report
-Check rtifacts/bugs/bug_report.json for step details and screenshots
+- Generated `artifacts/` content is ignored via `.gitignore`.
+- If files were previously tracked, run once:
 
-### Browser window not opening
-Remove --headed flag or add --keep-browser-open-ms 5000
-
----
-
-## GitHub Submission
-
-**For TestAthon 2026:**
-- ✅ Lean, focused codebase (no extra agents/dashboards)
-- ✅ Single workflow (workflow_gajab.txt)
-- ✅ Production-ready Playwright execution
-- ✅ Complete bug reporting (4 formats)
-- ✅ Demo-ready timeouts (5-8s max)
-- ✅ Clean repository structure
-
----
-
-## Team
-
-Built for **TestAthon Bangalore 2026**  
-Theme: *Autonomous Testing with Agentic AI*
-
----
-
-## License
-
-MIT
+```bash
+git rm -r --cached artifacts
+```

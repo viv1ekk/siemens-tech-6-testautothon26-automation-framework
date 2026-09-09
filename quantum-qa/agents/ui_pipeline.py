@@ -4,6 +4,7 @@ Discovers a generic web page, generates page object and Playwright test
 artifacts, and runs a generic smoke interaction.
 """
 
+import hashlib
 import json
 import random
 import re
@@ -518,16 +519,15 @@ class UiPipelineAgent:
             browser = p.chromium.launch(headless=not bool(ui_input.get("headed", False)))
             page = browser.new_page(
                 viewport={"width": 1280, "height": 900},
-                permissions=["microphone"],  # Only grant microphone, deny geolocation and camera
-                extra_http_headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+                permissions=["microphone"],
+                extra_http_headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
             )
-            # Dismiss location permission popup if it appears
             page.once("dialog", lambda dialog: dialog.dismiss())
             try:
                 page.goto(ui_input["url"], wait_until="domcontentloaded", timeout=8000)
                 steps.append({"step": "goto", "status": "passed"})
                 self._wait_for_initial_page_ready(page)
-                self._dismiss_common_popups(page)  # Close any initial popups
+                self._dismiss_common_popups(page)
                 for action in workflow["actions"]:
                     if self._visual_trace_enabled(ui_input):
                         print(f"[visual] Step {action.get('stage', '?')}: {action.get('raw_step', action.get('kind', 'Running step'))}")
@@ -570,6 +570,7 @@ class UiPipelineAgent:
             "errors": errors,
             "steps": steps,
             "workflow_summary": self._workflow_summary(workflow, steps),
+            "check_summary": self._check_summary(steps),
             "locator_summary": self._locator_summary(steps),
             "artifact_root": str(artifact_root).replace("\\", "/"),
             "step_screenshots_dir": str(step_artifacts_dir).replace("\\", "/"),
@@ -578,59 +579,246 @@ class UiPipelineAgent:
         self._write_json(artifact_root / "workflow_plan.json", workflow)
         return execution
 
-    def _fillable_elements(self, elements: list[dict]) -> list[dict]:
-        return [element for element in elements if element["kind"] == "input"]
+    def _nfr_policy(self, ui_input: dict | None = None) -> dict:
+        profile = str((ui_input or {}).get("run_profile", "demo")).lower()
+        policies = {
+            "demo": {
+                "a11y_max_issues": 60,
+                "a11y_max_critical": 6,
+                "issue_sample_limit": 25,
+                "perf_max_resources": 300,
+                "perf_max_dom_ms": 7000,
+                "perf_max_load_ms": 10000,
+                "perf_fail_on_missing_nav": False,
+                "visual_allow_dynamic_waiver": True,
+            },
+            "balanced": {
+                "a11y_max_issues": 35,
+                "a11y_max_critical": 4,
+                "issue_sample_limit": 25,
+                "perf_max_resources": 240,
+                "perf_max_dom_ms": 5500,
+                "perf_max_load_ms": 8500,
+                "perf_fail_on_missing_nav": False,
+                "visual_allow_dynamic_waiver": True,
+            },
+            "thorough": {
+                "a11y_max_issues": 15,
+                "a11y_max_critical": 2,
+                "issue_sample_limit": 25,
+                "perf_max_resources": 180,
+                "perf_max_dom_ms": 4500,
+                "perf_max_load_ms": 7000,
+                "perf_fail_on_missing_nav": True,
+                "visual_allow_dynamic_waiver": False,
+            },
+        }
+        return policies.get(profile, policies["demo"])
 
-    def _value_for_element(self, element: dict) -> str:
-        name = element["name"].lower()
-        selector = element["selector"]
-        strategy = selector["strategy"]
+    def _run_accessibility_scan(self, page, ui_input: dict | None = None) -> dict:
+        policy = self._nfr_policy(ui_input)
+        findings = page.evaluate(
+            """
+            () => {
+              const issues = [];
+              const interactive = Array.from(document.querySelectorAll('button, a, input, select, textarea, [role="button"], [role="link"], [contenteditable="true"]'));
+              interactive.forEach((el, index) => {
+                const ariaLabel = (el.getAttribute('aria-label') || '').trim();
+                const title = (el.getAttribute('title') || '').trim();
+                const text = (el.innerText || el.textContent || el.value || '').trim();
+                const labels = el.labels ? Array.from(el.labels).map((label) => (label.textContent || '').trim()).filter(Boolean) : [];
+                if (!(ariaLabel || title || text || labels.length)) {
+                  issues.push({ type: 'missing_accessible_name', tag: el.tagName.toLowerCase(), index, id: el.id || '', name: el.name || '' });
+                }
+              });
 
-        if "password" in name or strategy == "password":
-            return "Test@1234"
-        if "email" in name:
-            return "test@example.com"
-        if "url" in name:
-            return "https://example.com"
-        if "number" in name or strategy == "number":
-            return "123"
-        if element.get("tag") == "select":
-            return "option"
-        if "search" in name:
-            return "sample search"
-        if "name" in name or "text" in name or strategy in {"text", "placeholder", "label", "css"}:
-            return "sample input"
-        return "sample input"
+              Array.from(document.querySelectorAll('img')).forEach((img, index) => {
+                if (!(img.getAttribute('alt') || '').trim()) {
+                  issues.push({ type: 'missing_alt_text', tag: 'img', index, src: img.getAttribute('src') || '' });
+                }
+              });
 
-    def _primary_action(self, elements: list[dict]) -> dict | None:
-        actions = [e for e in elements if e["kind"] == "action"]
-        if not actions:
-            return None
+              const headingLevels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map((heading) => Number(heading.tagName.slice(1)));
+              for (let i = 1; i < headingLevels.length; i += 1) {
+                if (headingLevels[i] - headingLevels[i - 1] > 1) {
+                  issues.push({ type: 'heading_skip', from: headingLevels[i - 1], to: headingLevels[i] });
+                  break;
+                }
+              }
 
-        priority_terms = [
-            "submit",
-            "save",
-            "continue",
-            "next",
-            "search",
-            "apply",
-            "confirm",
-            "login",
-            "sign_in",
-            "checkout",
-            "buy",
-        ]
+              return {
+                interactiveCount: interactive.length,
+                imageCount: document.querySelectorAll('img').length,
+                headingCount: headingLevels.length,
+                issues,
+              };
+            }
+            """
+        )
+        raw_issues = findings.get("issues", [])
+        filtered_issues = []
+        for issue in raw_issues:
+            issue_id = str(issue.get("id", ""))
+            if re.match(r"home-wp\d+-carousel-dot-\d+", issue_id):
+                continue
+            filtered_issues.append(issue)
 
-        def score(item: dict) -> tuple[int, int]:
-            name = item["name"].lower()
-            score = 99
-            for idx, term in enumerate(priority_terms):
-                if term in name:
-                    score = idx
-                    break
-            return score, item["selector"].get("nth", 0)
+        critical_types = {"missing_alt_text", "heading_skip"}
+        critical_count = sum(1 for issue in filtered_issues if issue.get("type") in critical_types)
+        total_issues = len(filtered_issues)
+        sample_limit = int(policy.get("issue_sample_limit", 25))
+        passed = total_issues <= int(policy.get("a11y_max_issues", 60)) and critical_count <= int(policy.get("a11y_max_critical", 6))
 
-        return sorted(actions, key=score)[0]
+        budget_issues = []
+        if total_issues > int(policy.get("a11y_max_issues", 60)):
+            budget_issues.append(f"a11y_issue_budget_exceeded:{total_issues}")
+        if critical_count > int(policy.get("a11y_max_critical", 6)):
+            budget_issues.append(f"a11y_critical_budget_exceeded:{critical_count}")
+
+        return {
+            "passed": passed,
+            "issue_count": total_issues,
+            "critical_issue_count": critical_count,
+            "interactive_count": findings.get("interactiveCount", 0),
+            "image_count": findings.get("imageCount", 0),
+            "heading_count": findings.get("headingCount", 0),
+            "issues": filtered_issues[:sample_limit],
+            "budget_issues": budget_issues,
+        }
+
+    def _run_performance_scan(self, page, ui_input: dict | None = None) -> dict:
+        policy = self._nfr_policy(ui_input)
+        metrics = page.evaluate(
+            """
+            () => {
+              const nav = performance.getEntriesByType('navigation')[0] || null;
+              const resources = performance.getEntriesByType('resource');
+              return {
+                domContentLoadedMs: nav ? Math.round(nav.domContentLoadedEventEnd - nav.startTime) : null,
+                loadEventEndMs: nav ? Math.round(nav.loadEventEnd - nav.startTime) : null,
+                transferSize: nav ? Math.round(nav.transferSize || 0) : null,
+                encodedBodySize: nav ? Math.round(nav.encodedBodySize || 0) : null,
+                resourceCount: resources.length,
+              };
+            }
+            """
+        )
+        dom_ms = metrics.get("domContentLoadedMs")
+        load_ms = metrics.get("loadEventEndMs")
+        resource_count = int(metrics.get("resourceCount", 0) or 0)
+        budget_issues = []
+        if dom_ms is None or load_ms is None:
+            if bool(policy.get("perf_fail_on_missing_nav", False)):
+                budget_issues.append("navigation_timing_unavailable")
+        elif dom_ms > int(policy.get("perf_max_dom_ms", 7000)) or load_ms > int(policy.get("perf_max_load_ms", 10000)):
+            budget_issues.append(f"slow_navigation:{dom_ms}/{load_ms}")
+        if resource_count > int(policy.get("perf_max_resources", 300)):
+            budget_issues.append(f"too_many_resources:{resource_count}")
+        return {
+            "passed": not budget_issues,
+            "metrics": metrics,
+            "issues": budget_issues,
+            "error": "Performance budget exceeded" if budget_issues else "",
+        }
+
+    def _run_security_scan(self, page) -> dict:
+        findings = page.evaluate(
+            """
+            () => {
+              const issues = [];
+              const forms = Array.from(document.querySelectorAll('form'));
+              const insecureForms = forms.filter((form) => (form.getAttribute('action') || '').startsWith('http://'));
+              const javascriptLinks = Array.from(document.querySelectorAll('a[href^="javascript:"], area[href^="javascript:"]'));
+              const mixedContent = Array.from(document.querySelectorAll('script[src^="http://"], img[src^="http://"], link[href^="http://"], iframe[src^="http://"]'));
+
+              if (location.protocol !== 'https:') {
+                issues.push({ type: 'insecure_protocol', protocol: location.protocol });
+              }
+              insecureForms.forEach((form, index) => issues.push({ type: 'insecure_form_action', index, action: form.getAttribute('action') || '' }));
+              javascriptLinks.forEach((link, index) => issues.push({ type: 'javascript_url', index, href: link.getAttribute('href') || '' }));
+              mixedContent.forEach((node, index) => issues.push({ type: 'mixed_content', index, src: node.getAttribute('src') || node.getAttribute('href') || '' }));
+
+              return {
+                formCount: forms.length,
+                insecureFormCount: insecureForms.length,
+                javascriptLinkCount: javascriptLinks.length,
+                mixedContentCount: mixedContent.length,
+                issues,
+              };
+            }
+            """
+        )
+        issues = findings.get("issues", [])
+        return {
+            "passed": not issues,
+            "issue_count": len(issues),
+            "form_count": findings.get("formCount", 0),
+            "insecure_form_count": findings.get("insecureFormCount", 0),
+            "javascript_link_count": findings.get("javascriptLinkCount", 0),
+            "mixed_content_count": findings.get("mixedContentCount", 0),
+            "issues": issues[:25],
+            "error": "Security findings detected" if issues else "",
+        }
+
+    def _run_visual_compare(self, page, ui_input: dict) -> dict:
+        policy = self._nfr_policy(ui_input)
+        artifact_root = self._artifact_root(ui_input)
+        baseline_dir = artifact_root / "visual_baselines"
+        baseline_dir.mkdir(parents=True, exist_ok=True)
+        screenshot_dir = artifact_root / "step_screenshots"
+        screenshot_dir.mkdir(parents=True, exist_ok=True)
+        slug = self._slugify(ui_input.get("scenario_name", "visual_compare")) or "visual_compare"
+        if bool(ui_input.get("nfr_only", False)):
+            slug = f"{slug}_nfr"
+        baseline_path = baseline_dir / f"{slug}.json"
+        screenshot_path = screenshot_dir / f"visual_compare_{slug}.png"
+        screenshot_bytes = page.screenshot(path=str(screenshot_path), full_page=True)
+        current_hash = hashlib.sha256(screenshot_bytes).hexdigest()
+        page.wait_for_timeout(450)
+        stable_probe_hash = hashlib.sha256(page.screenshot(full_page=True)).hexdigest()
+        is_dynamic_page = stable_probe_hash != current_hash
+
+        if not baseline_path.exists():
+            baseline = {
+                "scenario_name": ui_input.get("scenario_name", ""),
+                "url": ui_input.get("url", ""),
+                "page_title": page.title(),
+                "hash": current_hash,
+                "created_from": str(screenshot_path).replace("\\", "/"),
+            }
+            self._write_json(baseline_path, baseline)
+            return {
+                "passed": True,
+                "baseline_created": True,
+                "baseline_hash": current_hash,
+                "current_hash": current_hash,
+                "baseline_path": str(baseline_path).replace("\\", "/"),
+                "screenshot_path": str(screenshot_path).replace("\\", "/"),
+                "issues": [],
+            }
+
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+        baseline_hash = str(baseline.get("hash", ""))
+        passed = baseline_hash == current_hash
+        issues = [] if passed else ["visual_hash_mismatch"]
+        waived_dynamic = False
+        if not passed and is_dynamic_page and bool(policy.get("visual_allow_dynamic_waiver", True)):
+            passed = True
+            waived_dynamic = True
+            issues = ["visual_dynamic_content_detected"]
+        return {
+            "passed": passed,
+            "baseline_created": False,
+            "baseline_hash": baseline_hash,
+            "current_hash": current_hash,
+            "stability_probe_hash": stable_probe_hash,
+            "is_dynamic_page": is_dynamic_page,
+            "waived_dynamic_mismatch": waived_dynamic,
+            "baseline_path": str(baseline_path).replace("\\", "/"),
+            "screenshot_path": str(screenshot_path).replace("\\", "/"),
+            "issues": issues,
+            "error": "Visual comparison mismatch" if not passed else "",
+        }
 
     def _resolve_locator(self, page, selector: dict):
         strategy = selector["strategy"]
@@ -745,6 +933,8 @@ class UiPipelineAgent:
             elif kind == "assert_url_contains":
                 fragment = action.get("url_fragment", action.get("target", ""))
                 lines.append(f"  await expect(page).toHaveURL(new RegExp({json.dumps(fragment)}));")
+            elif kind in {"accessibility_scan", "performance_budget", "security_smoke", "visual_compare"}:
+                lines.append(f"  // Non-functional check: {kind} ({json.dumps(action.get('target', kind))})")
 
         lines.append("  await expect(page.locator('body')).toBeVisible();")
         lines.append("});")
@@ -752,6 +942,21 @@ class UiPipelineAgent:
 
     def _build_workflow(self, ui_input: dict, discovery: dict, intent: dict | None = None) -> dict:
         execution_mode = self._resolve_execution_mode(ui_input, intent or {})
+        if bool(ui_input.get("nfr_only", False)):
+            actions = self._nfr_setup_actions(ui_input, discovery)
+            actions.extend(self._non_functional_actions(ui_input, intent or {}, force_all=True))
+            for index, action in enumerate(actions, start=1):
+                action["stage"] = index
+            return {
+                "status": "generated",
+                "workflow_type": "non_functional",
+                "source": "nfr_only",
+                "actions": actions,
+                "total_actions": len(actions),
+                "execution_mode": execution_mode,
+                "intent": intent or {},
+            }
+
         if intent is not None:
             intent_actions = self._actions_from_intent(ui_input, discovery, intent)
             if intent_actions:
@@ -821,7 +1026,7 @@ class UiPipelineAgent:
                 continue
 
             action = {
-                "kind": action_name if action_name in {"goto", "click", "fill", "select", "check", "assert_visible"} else "assert_visible",
+                "kind": action_name if action_name in {"goto", "click", "fill", "select", "check", "assert_visible", "accessibility_scan", "performance_budget", "security_smoke", "visual_compare"} else "assert_visible",
                 "target": target or action_name,
                 "required": True,
                 "raw_step": f"LLM:{action_name}:{target}",
@@ -1005,6 +1210,12 @@ class UiPipelineAgent:
         return "strict"
 
     def _fallback_actions(self, ui_input: dict, discovery: dict, intent: dict, execution_mode: str, raw_steps: list[str]) -> list[dict]:
+        nf_actions = self._non_functional_actions(ui_input, intent)
+        if nf_actions:
+            for index, action in enumerate(nf_actions, start=1):
+                action["stage"] = index
+            return nf_actions
+
         if execution_mode == "strict" and raw_steps:
             return [
                 {
@@ -1048,6 +1259,74 @@ class UiPipelineAgent:
             })
         return actions
 
+    def _non_functional_actions(self, ui_input: dict, intent: dict, force_all: bool = False) -> list[dict]:
+        statement = str(ui_input.get("problem_statement", "")).lower()
+        skills = {
+            str(skill).strip().lower()
+            for skill in intent.get("required_test_skills", [])
+            if str(skill).strip()
+        }
+        actions: list[dict] = []
+
+        if force_all or "accessibility" in statement or "accessibility_check" in skills:
+            actions.append({"kind": "accessibility_scan", "target": "accessibility", "required": True, "raw_step": "Accessibility check"})
+
+        if force_all or any(token in statement for token in ["performance", "load time", "timing", "speed"]) or "performance_check" in skills:
+            actions.append({"kind": "performance_budget", "target": "performance", "required": True, "raw_step": "Performance check"})
+
+        if force_all or any(token in statement for token in ["security", "secure", "vulnerability", "mixed content"]) or "security_check" in skills:
+            actions.append({"kind": "security_smoke", "target": "security", "required": True, "raw_step": "Security check"})
+
+        if force_all or any(token in statement for token in ["visual regression", "visual comparison", "page comparison", "screenshot comparison", "compare page"]) or "visual_compare" in skills:
+            actions.append({"kind": "visual_compare", "target": "visual", "required": True, "raw_step": "Visual regression check"})
+
+        return actions
+
+    def _nfr_setup_actions(self, ui_input: dict, discovery: dict) -> list[dict]:
+        """Reuse key functional bootstrap steps so NFR checks run after popup/login stabilization."""
+        statement = str(ui_input.get("problem_statement", ""))
+        raw_steps = self._extract_requirement_steps(statement)
+        if not raw_steps:
+            return []
+
+        include_tokens = [
+            "launch browser",
+            "navigate",
+            "open url",
+            "home page",
+            "log in",
+            "sign up",
+            "sign in",
+            "mobile",
+            "request otp",
+            "otp",
+            "check box",
+            "terms and conditions",
+            "wait for account creation",
+        ]
+        stop_tokens = [
+            "verify location results",
+            "deal of the day",
+            "order details",
+            "verify the savings",
+        ]
+
+        actions: list[dict] = []
+        for raw_step in raw_steps:
+            lower = raw_step.lower()
+            if any(token in lower for token in stop_tokens):
+                break
+            if not any(token in lower for token in include_tokens):
+                continue
+            parsed = self._parse_step(raw_step, discovery)
+            if not parsed:
+                continue
+            for action in parsed:
+                action = dict(action)
+                action["required"] = False
+                actions.append(action)
+        return actions
+
     def _run_workflow_action(
         self,
         page,
@@ -1070,10 +1349,12 @@ class UiPipelineAgent:
         )
         try:
             self._wait_for_page_ready(page)
+            self._dismiss_common_popups(page)
             if kind == "goto":
                 url = action.get("url") or page.url
                 page.goto(url, wait_until="domcontentloaded", timeout=5000)
                 self._wait_for_page_ready(page)
+                self._dismiss_common_popups(page)
                 self._refresh_discovery_from_page(page, discovery)
                 step_result = {"step": step_title, "status": "passed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": {"navigation_url": url}}
             elif kind == "click":
@@ -1201,6 +1482,28 @@ class UiPipelineAgent:
                         if not found:
                             raise PlaywrightTimeoutError(f"Assertion text '{assert_text}' not found or not visible")
                     step_result = {"step": step_title, "status": "passed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": {"assertion_attempts": assertion_attempts, "assert_text": assert_text}}
+            elif kind == "accessibility_scan":
+                report = self._run_accessibility_scan(page, ui_input)
+                issues = report.get("issues", [])
+                step_result = {"step": step_title, "status": "passed" if report.get("passed", False) else "failed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": report}
+                if not report.get("passed", False):
+                    issue_count = int(report.get("issue_count", len(issues)))
+                    step_result["error"] = f"Accessibility issues found: {issue_count}"
+            elif kind == "performance_budget":
+                report = self._run_performance_scan(page, ui_input)
+                step_result = {"step": step_title, "status": "passed" if report.get("passed", False) else "failed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": report}
+                if not report.get("passed", False):
+                    step_result["error"] = report.get("error", "Performance budget exceeded")
+            elif kind == "security_smoke":
+                report = self._run_security_scan(page)
+                step_result = {"step": step_title, "status": "passed" if report.get("passed", False) else "failed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": report}
+                if not report.get("passed", False):
+                    step_result["error"] = report.get("error", "Security findings detected")
+            elif kind == "visual_compare":
+                report = self._run_visual_compare(page, ui_input)
+                step_result = {"step": step_title, "status": "passed" if report.get("passed", False) else "failed", "stage": action.get("stage"), "raw_step": action.get("raw_step", ""), "details": report}
+                if not report.get("passed", False):
+                    step_result["error"] = report.get("error", "Visual comparison mismatch")
             elif kind == "refresh":
                 page.reload(wait_until="domcontentloaded", timeout=5000)
                 self._wait_for_page_ready(page)
@@ -1221,7 +1524,7 @@ class UiPipelineAgent:
         workflow_steps = [
             s
             for s in steps
-            if s.get("stage") is not None and s.get("step", "").split(":")[0] in {"goto", "click", "fill", "check", "select", "assert_visible", "refresh"}
+            if s.get("stage") is not None and s.get("step", "").split(":")[0] in {"goto", "click", "fill", "check", "select", "assert_visible", "refresh", "accessibility_scan", "performance_budget", "security_smoke", "visual_compare"}
         ]
         passed = len([s for s in workflow_steps if s.get("status") == "passed"])
         failed = len([s for s in workflow_steps if s.get("status") == "failed"])
@@ -1233,6 +1536,47 @@ class UiPipelineAgent:
             "failed": failed,
             "skipped": skipped,
         }
+
+    def _check_summary(self, steps: list[dict]) -> dict:
+        categories: dict[str, dict[str, int]] = {}
+        for step in steps:
+            category = self._step_category(step)
+            if not category:
+                continue
+            if category not in categories:
+                categories[category] = {"passed": 0, "failed": 0, "issues": 0}
+            status = str(step.get("status", "")).lower()
+            if status == "passed":
+                categories[category]["passed"] += 1
+            elif status == "failed":
+                categories[category]["failed"] += 1
+            details = step.get("details", {}) if isinstance(step.get("details", {}), dict) else {}
+            issue_count = details.get("issue_count")
+            if issue_count is not None:
+                categories[category]["issues"] += int(issue_count)
+            elif details.get("issues"):
+                categories[category]["issues"] += len(details.get("issues", []))
+
+        total_checks = sum(item["passed"] + item["failed"] for item in categories.values())
+        failed_checks = sum(item["failed"] for item in categories.values())
+        return {
+            "total_checks": total_checks,
+            "failed_checks": failed_checks,
+            "passed_checks": total_checks - failed_checks,
+            "categories": categories,
+        }
+
+    def _step_category(self, step: dict) -> str:
+        kind = str(step.get("step", "")).split(":", 1)[0]
+        if kind == "accessibility_scan":
+            return "accessibility"
+        if kind == "performance_budget":
+            return "performance"
+        if kind == "security_smoke":
+            return "security"
+        if kind == "visual_compare":
+            return "visual"
+        return ""
 
     def _locator_summary(self, steps: list[dict]) -> dict:
         healed = 0
@@ -1404,22 +1748,119 @@ class UiPipelineAgent:
             "button:has-text('Dismiss')",
             "button:has-text('No Thanks')",
             "button:has-text('Not now')",
+            "button:has-text('Skip')",
+            "button:has-text('Later')",
+            "button:has-text('Maybe later')",
+            "button:has-text('Continue without')",
+            "button:has-text('x')",
+            "button:has-text('X')",
+            "button:has-text('×')",
+            "button:has-text('✕')",
+            "[class*='close']",
+            "[class*='dismiss']",
+            "[class*='cross']",
             "[class*='modal-close']",
             "[class*='popup-close']",
+            "[class*='close-btn']",
+            "[id*='close']",
+            "[id*='dismiss']",
             "[data-testid*='close']",
+            "[data-dismiss]",
+            "[data-action*='close']",
             "button[aria-label*='Close']",
             "button[aria-label*='Dismiss']",
+            "[aria-label*='close' i]",
+            "[title*='close' i]",
+            "[role='button'][aria-label*='close' i]",
+            "[role='button'][title*='close' i]",
         ]
-        
-        for selector in popup_selectors:
+
+        def _dismiss_in_context(context) -> bool:
+            dismissed_local = False
+            for selector in popup_selectors:
+                try:
+                    locator = context.locator(selector)
+                    count = min(locator.count(), 4)
+                    for index in range(count):
+                        candidate = locator.nth(index)
+                        if candidate.is_visible(timeout=250):
+                            candidate.click(timeout=800)
+                            page.wait_for_timeout(150)
+                            dismissed_local = True
+                except Exception:
+                    pass
+            return dismissed_local
+
+        def _dismiss_by_dom_probe() -> bool:
             try:
-                locator = page.locator(selector).first
-                if locator.is_visible(timeout=500):
-                    locator.click(timeout=1000)
-                    page.wait_for_timeout(300)
-                    break
+                clicked = page.evaluate(
+                    """
+                    () => {
+                      const visible = (el) => {
+                        const style = window.getComputedStyle(el);
+                        const rect = el.getBoundingClientRect();
+                        return rect.width > 6 && rect.height > 6 && style.visibility !== 'hidden' && style.display !== 'none' && style.pointerEvents !== 'none';
+                      };
+                      const score = (el) => {
+                        const text = (el.textContent || '').trim().toLowerCase();
+                        const aria = (el.getAttribute('aria-label') || '').toLowerCase();
+                        const title = (el.getAttribute('title') || '').toLowerCase();
+                        const cls = (el.className || '').toString().toLowerCase();
+                        const id = (el.id || '').toLowerCase();
+                        const role = (el.getAttribute('role') || '').toLowerCase();
+                        const rect = el.getBoundingClientRect();
+                        const posBonus = (rect.top < window.innerHeight * 0.6 && rect.left > window.innerWidth * 0.4) ? 10 : 0;
+                        let s = posBonus;
+                        if (/(close|dismiss|skip|later|not now)/.test(`${text} ${aria} ${title} ${cls} ${id}`)) s += 80;
+                        if (/^(x|×|✕)$/.test(text)) s += 70;
+                        if (role === 'button' || el.tagName.toLowerCase() === 'button') s += 8;
+                        return s;
+                      };
+
+                      const candidates = Array.from(document.querySelectorAll('button, [role="button"], a, div, span'))
+                        .filter((el) => visible(el))
+                        .map((el) => ({ el, s: score(el) }))
+                        .filter((item) => item.s >= 70)
+                        .sort((a, b) => b.s - a.s)
+                        .slice(0, 5);
+
+                      let clickedAny = false;
+                      for (const item of candidates) {
+                        item.el.click();
+                        clickedAny = true;
+                      }
+                      return clickedAny;
+                    }
+                    """
+                )
+                return bool(clicked)
+            except Exception:
+                return False
+
+        for _ in range(4):
+            dismissed_any = False
+
+            try:
+                page.keyboard.press("Escape")
+                page.wait_for_timeout(120)
             except Exception:
                 pass
+
+            if _dismiss_in_context(page):
+                dismissed_any = True
+
+            for frame in page.frames:
+                try:
+                    if _dismiss_in_context(frame):
+                        dismissed_any = True
+                except Exception:
+                    pass
+
+            if _dismiss_by_dom_probe():
+                dismissed_any = True
+
+            if not dismissed_any:
+                break
 
     def _contextual_checkbox_locator(self, page, action: dict, execution_context: dict):
         target = str(action.get("target", ""))
