@@ -569,6 +569,24 @@
       "value": "#back-to-top-btn",
       "kind": "action",
       "source": "css"
+    },
+    "location_desktop_dropdown_close_btn": {
+      "strategy": "css",
+      "value": "#location-desktop-dropdown-close-btn",
+      "kind": "action",
+      "source": "css"
+    },
+    "location_desktop_login_link": {
+      "strategy": "css",
+      "value": "#location-desktop-login-link",
+      "kind": "action",
+      "source": "css"
+    },
+    "location_desktop_search_input": {
+      "strategy": "css",
+      "value": "#location-desktop-search-input",
+      "kind": "input",
+      "source": "css"
     }
   }
 }
