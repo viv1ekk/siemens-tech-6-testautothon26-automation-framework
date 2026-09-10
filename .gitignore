@@ -1,1 +1,19 @@
+# Python env
+.venv/
+.venv-1/
+.venv-2/
+.venv-3/
+__pycache__/
+*.pyc
+
+# Local secrets
 quantum-qa/.env
+
+# Generated run artifacts
+artifacts/**
+dashboard/data/latest_run.json
+dashboard/data/audit_trail.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

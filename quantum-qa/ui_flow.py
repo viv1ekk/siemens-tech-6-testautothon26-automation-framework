@@ -441,6 +441,7 @@ def main():
     parser.add_argument("--ui-problem-statement", default="")
     parser.add_argument("--ui-problem-statement-file", default="")
     parser.add_argument("--ui-platform", default="web")
+    parser.add_argument("--ui-browser", default="chromium", choices=["chromium", "firefox", "webkit"])
     parser.add_argument("--ui-scenario", default="ui-smoke")
     parser.add_argument("--ui-mode", default="auto", choices=["auto", "strict", "explore"])
     parser.add_argument("--run-profile", default="demo", choices=["demo", "balanced", "thorough"])
@@ -461,6 +462,7 @@ def main():
         "url": args.ui_url,
         "problem_statement": problem_statement,
         "target_platform": args.ui_platform,
+        "browser": args.ui_browser,
         "scenario_name": args.ui_scenario,
         "execution_mode": args.ui_mode,
         "run_profile": args.run_profile,

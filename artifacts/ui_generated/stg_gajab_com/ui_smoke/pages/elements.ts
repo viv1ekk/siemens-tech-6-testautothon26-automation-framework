@@ -25,17 +25,9 @@ export const locators = {
     "strategy": "css",
     "value": "#header-become-seller-btn"
   },
-  "header_my_bargains_btn": {
-    "strategy": "css",
-    "value": "#header-my-bargains-btn"
-  },
   "header_login_btn": {
     "strategy": "css",
     "value": "#header-login-btn"
-  },
-  "category_list_scroll_right_btn": {
-    "strategy": "css",
-    "value": "#category-list-scroll-right-btn"
   },
   "category_list_desktop_link_1": {
     "strategy": "css",
@@ -100,166 +92,6 @@ export const locators = {
   "home_wp2_view_more": {
     "strategy": "css",
     "value": "#home-wp2-view-more"
-  },
-  "home_wp2_item_link_202617498994": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202617498994"
-  },
-  "home_wp2_item_bargain_btn_202617498994": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202617498994"
-  },
-  "home_wp2_item_link_pw_2381522385": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-PW-2381522385"
-  },
-  "home_wp2_item_bargain_btn_pw_2381522385": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-PW-2381522385"
-  },
-  "home_wp2_item_link_bott316501764": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-BOTT316501764"
-  },
-  "home_wp2_item_bargain_btn_bott316501764": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-BOTT316501764"
-  },
-  "home_wp2_item_link_202665302021": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202665302021"
-  },
-  "home_wp2_item_bargain_btn_202665302021": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202665302021"
-  },
-  "home_wp2_item_link_yche205952319": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-YCHE205952319"
-  },
-  "home_wp2_item_bargain_btn_yche205952319": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-YCHE205952319"
-  },
-  "home_wp2_item_link_bath937082743": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-BATH937082743"
-  },
-  "home_wp2_item_bargain_btn_bath937082743": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-BATH937082743"
-  },
-  "home_wp2_item_link_88co099751365": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-88CO099751365"
-  },
-  "home_wp2_item_bargain_btn_88co099751365": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-88CO099751365"
-  },
-  "home_wp2_item_link_whit160220422": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-WHIT160220422"
-  },
-  "home_wp2_item_bargain_btn_whit160220422": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-WHIT160220422"
-  },
-  "home_wp2_item_link_car_165118929": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-CAR_165118929"
-  },
-  "home_wp2_item_bargain_btn_car_165118929": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-CAR_165118929"
-  },
-  "home_wp2_item_link_003_332698443": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-003_332698443"
-  },
-  "home_wp2_item_bargain_btn_003_332698443": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-003_332698443"
-  },
-  "home_wp2_item_link_tabl668455644": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-TABL668455644"
-  },
-  "home_wp2_item_bargain_btn_tabl668455644": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-TABL668455644"
-  },
-  "home_wp2_item_link_8vdr152898541": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-8VDR152898541"
-  },
-  "home_wp2_item_bargain_btn_8vdr152898541": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-8VDR152898541"
-  },
-  "home_wp2_item_link_12le891386560": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-12LE891386560"
-  },
-  "home_wp2_item_bargain_btn_12le891386560": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-12LE891386560"
-  },
-  "home_wp2_item_link_202693821050": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202693821050"
-  },
-  "home_wp2_item_bargain_btn_202693821050": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202693821050"
-  },
-  "home_wp2_item_link_202605101898": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202605101898"
-  },
-  "home_wp2_item_bargain_btn_202605101898": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202605101898"
-  },
-  "home_wp2_item_link_bath942710901": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-BATH942710901"
-  },
-  "home_wp2_item_bargain_btn_bath942710901": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-BATH942710901"
-  },
-  "home_wp2_item_link_202622690268": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202622690268"
-  },
-  "home_wp2_item_bargain_btn_202622690268": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202622690268"
-  },
-  "home_wp2_item_link_202667457799": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-202667457799"
-  },
-  "home_wp2_item_bargain_btn_202667457799": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-202667457799"
-  },
-  "home_wp2_item_link_7p1n773529168": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-7P1N773529168"
-  },
-  "home_wp2_item_bargain_btn_7p1n773529168": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-7P1N773529168"
-  },
-  "home_wp2_item_link_003_341854283": {
-    "strategy": "css",
-    "value": "#home-wp2-item-link-003_341854283"
-  },
-  "home_wp2_item_bargain_btn_003_341854283": {
-    "strategy": "css",
-    "value": "#home-wp2-item-bargain-btn-003_341854283"
   },
   "home_wp3_product_img_link": {
     "strategy": "css",
@@ -356,26 +188,6 @@ export const locators = {
   "footer_email_link": {
     "strategy": "css",
     "value": "#footer-email-link"
-  },
-  "footer_social_instagram": {
-    "strategy": "css",
-    "value": "#footer-social-instagram"
-  },
-  "footer_social_facebook": {
-    "strategy": "css",
-    "value": "#footer-social-facebook"
-  },
-  "footer_social_twitter": {
-    "strategy": "css",
-    "value": "#footer-social-twitter"
-  },
-  "footer_social_youtube": {
-    "strategy": "css",
-    "value": "#footer-social-youtube"
-  },
-  "footer_social_linkedin": {
-    "strategy": "css",
-    "value": "#footer-social-linkedin"
   },
   "back_to_top_btn": {
     "strategy": "css",

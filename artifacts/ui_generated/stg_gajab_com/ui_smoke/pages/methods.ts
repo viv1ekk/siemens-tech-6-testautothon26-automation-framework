@@ -35,7 +35,14 @@ export class UiSmokePageMethods {
   }
 
   async click(key: LocatorKey) {
-    await this.resolve(key).click();
+    await this.resolve(key).first().click();
+  }
+
+  async hover(key: LocatorKey) {
+    const target = this.resolve(key).first();
+    await target.hover({ force: true });
+    await target.dispatchEvent('mouseover');
+    await target.dispatchEvent('mouseenter');
   }
 
   async text(key: LocatorKey) {

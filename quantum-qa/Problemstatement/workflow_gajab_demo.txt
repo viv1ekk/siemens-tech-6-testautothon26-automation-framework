@@ -1,0 +1,63 @@
+Test Case: Gajab Demo Customer Journey (Stable Showcase)
+
+Website: https://stg.gajab.com/
+Test Credentials:
+- Mobile Number: random 10 digit number
+- OTP: '123456'
+- Name: Test User
+- Gender: Male
+- Pin Code: '560001'
+- Product Brand: SERA'S BASKET
+- Price Range: 427 to 727
+- Payment Method: Net Banking
+
+Steps:
+1. Launch browser
+2. Navigate to url 'https://stg.gajab.com/'
+3. Verify that home page is visible
+4. Click on 'Log in' or 'Sign up' button
+5. Verify url contains 'signin' after page loads
+6. Enter random 10 digit mobile number in mobile field
+7. Click on the check box for terms and conditions
+8. Click 'Request OTP' button
+9. Enter OTP '123456' in OTP field
+10. Wait for account creation form page to appear
+11. Enter name 'Test User' in name field
+12. Click on 'Male' button for gender selection
+13. Click on 'Submit' or 'Next' button to create account
+14. Click on location dropdown or location search field
+15. Wait for location search field to become active
+16. Enter pin code '560001' in location search field
+17. Verify location results are displayed
+18. Select the location from search results or dropdown
+19. Verify that Gajab Deal of the Day section is visible
+20. Capture the product name from Deal of the Day
+21. Capture the product image from Deal of the Day
+22. Capture the asking price from Deal of the Day
+23. Navigate to Trending Products section
+24. Identify the most-bargained product under Trending Products
+25. Capture screenshot of the most-bargained product
+26. Verify that Just Bargained section is visible on home page
+27. Capture the name and city of the latest live order
+28. Click on Toys and Games category tab
+29. Click on SERA'S BASKET brand from the left filter
+30. Click on price range filter and set from 427 to 727
+31. Click on the selected product
+32. Click on Bargain button to start bargaining
+33. Enter bargain offer and submit
+34. Wait for seller response to bargain offer
+35. Enter another bargain offer and submit
+36. Wait for seller response to bargain offer
+37. Enter final bargain offer and submit
+38. Wait for seller response to bargain offer
+39. Click on Accept button to accept the final bargain offer
+40. Click on Buy Now button
+41. Enter address line 1 '123 Demo Street' in address line 1 field
+42. Enter address line 2 'Near Demo Landmark' in address line 2 field
+43. Select Home address type button
+44. Click on Save Address button
+45. Click on Pay Online payment option
+46. Click on Pay button
+47. Click on Net Banking option
+48. Click on a bank from the list
+49. Complete payment on bank portal
